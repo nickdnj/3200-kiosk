@@ -1,0 +1,13 @@
+[Unit]
+Description=Concurrent 3280 OS/32 emulator (SIMH Interdata 32)
+After=network.target
+
+[Service]
+User=vcfed
+WorkingDirectory=/opt/3280-kiosk/os32
+ExecStart=/opt/3280-kiosk/simh/BIN/id32 os32.ini
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

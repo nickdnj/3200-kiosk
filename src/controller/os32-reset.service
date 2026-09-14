@@ -1,0 +1,6 @@
+[Unit]
+Description=Nightly clean restart of OS/32 + bridge
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl restart os32.service
+ExecStartPost=/usr/bin/systemctl restart os32-bridge.service

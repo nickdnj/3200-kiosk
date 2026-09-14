@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Concurrent 3280 &mdash; OS/32</title>
+<link rel="stylesheet" href="vendor/xterm.css">
+<style>
+  :root{
+    --amber:#ffb838; --bg:#0b0a08; --bar:#16130d;
+    --key-ink:#f0e2c4; --key-line:#3a3324; --go:#d7a94e; --accent:#123a6b;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;width:100%;overflow:hidden;background:var(--bg);
+    font-family:"Oswald","Segoe UI",system-ui,sans-serif;-webkit-user-select:none;user-select:none;
+    touch-action:none;cursor:none}
+  body{display:flex;flex-direction:column}
+
+  .bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:10px 16px;background:var(--bar);border-bottom:1px solid #2a2417}
+  .bar .id{display:flex;flex-direction:column;line-height:1.15}
+  .bar .id b{color:var(--amber);font-size:16px;letter-spacing:.02em;font-weight:600}
+  .bar .id span{color:#8c805f;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+  .back{border:1px solid var(--key-line);background:#241f16;color:var(--key-ink);
+    font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    padding:10px 14px;border-radius:8px}
+  .back:active{background:#2f2819}
+  .status{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6f6547}
+  .status.on{color:var(--go)}
+
+  #term{flex:1 1 auto;min-height:0;background:#000;padding:8px 8px 2px}
+  .xterm{height:100%}
+
+  /* tappable command hints */
+  .hints{flex:0 0 auto;display:flex;gap:7px;align-items:center;overflow-x:auto;
+    padding:8px 12px;background:#100e09;border-top:1px solid #241f14;scrollbar-width:none}
+  .hints::-webkit-scrollbar{display:none}
+  .hints .lbl{flex:0 0 auto;color:#7d7358;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .chip{flex:0 0 auto;border:1px solid #3a3324;background:#1d1810;color:#e9d9b4;
+    font-family:"Space Mono",ui-monospace,monospace;font-size:14px;padding:8px 13px;border-radius:20px;
+    white-space:nowrap}
+  .chip:active{background:var(--go);color:#1a1408;border-color:var(--go)}
+  .chip.demo{border-color:var(--accent);background:#12233d;color:#bcd4f2}
+  .chip.demo:active{background:#2f6bd6;color:#fff}
+
+  .kbd{flex:0 0 auto;background:var(--bar);border-top:1px solid #2a2417;
+    padding:6px clamp(4px,1vw,10px) calc(6px + env(safe-area-inset-bottom));display:flex;
+    flex-direction:column;gap:5px}
+  .krow{display:flex;gap:5px}
+  .k{flex:1 1 0;min-width:0;height:clamp(40px,7vh,58px);border:1px solid var(--key-line);
+    background:linear-gradient(#282112,#211b10);color:var(--key-ink);border-radius:8px;
+    font-family:"Space Mono",ui-monospace,monospace;font-size:clamp(15px,2.5vh,21px);font-weight:700;
+    display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+  .k:active,.k.hold{background:linear-gradient(var(--go),#b98a2e);color:#1a1408;border-color:var(--go)}
+  .k .sup{position:absolute;top:3px;right:7px;font-size:.6em;color:#8c805f;font-weight:400}
+  .k:active .sup,.k.hold .sup{color:#3a2c08}
+  .k.mod{background:linear-gradient(#20242c,#171a20);color:#bcd0e6;font-size:clamp(12px,1.9vh,15px);
+    letter-spacing:.04em;flex:1.6 1 0}
+  .k.mod.on{background:linear-gradient(var(--go),#b98a2e);color:#1a1408}
+  .k.bksp{flex:1.7 1 0} .k.ret{flex:1.9 1 0;background:linear-gradient(#1d2a1d,#152015);color:#a9e0a9}
+  .k.space{flex:7 1 0}
+</style>
+</head>
+<body>
+  <div class="bar">
+    <div class="id"><b>Perkin&#8209;Elmer OS/32</b><span>Concurrent 3280 &middot; live emulation</span></div>
+    <div class="status" id="status">connecting&hellip;</div>
+    <button class="back" id="restart" style="margin-right:8px">&#8635;&nbsp;Restart</button>
+    <button class="back" id="back">&#8592;&nbsp;Exhibit</button>
+  </div>
+
+  <div id="term"></div>
+
+  <div class="hints" id="hints">
+    <span class="lbl">Try&nbsp;tapping:</span>
+    <button class="chip" data-cmd="display files">display files</button>
+    <button class="chip" data-cmd="display time">display time</button>
+    <button class="chip" data-cmd="help *">help *</button>
+    <span class="lbl" style="margin-left:4px">run a program:</span>
+    <button class="chip demo" data-cmd="forclg hellof">&#9654;&nbsp;Fortran</button>
+    <button class="chip demo" data-cmd="pasclg hellop">&#9654;&nbsp;Pascal</button>
+    <button class="chip demo" data-cmd="cc helloc">&#9654;&nbsp;C</button>
+  </div>
+
+  <div class="kbd" id="kbd"></div>
+
+  <script src="vendor/xterm.js"></script>
+  <script src="vendor/xterm-addon-fit.js"></script>
+  <script>
+  const term = new Terminal({
+    cursorBlink:true, fontFamily:'"Space Mono", ui-monospace, monospace',
+    fontSize:18, lineHeight:1.05, scrollback:800, convertEol:false,
+    theme:{ background:'#000000', foreground:'#ffb838', cursor:'#ffb838',
+            selectionBackground:'#5a4a1e' }
+  });
+  const fit = new FitAddon.FitAddon();
+  term.loadAddon(fit); term.open(document.getElementById('term')); fit.fit();
+  addEventListener('resize', ()=>{ try{fit.fit();}catch(e){} });
+
+  // ---- websocket to the OS/32 bridge ----
+  const statusEl = document.getElementById('status');
+  const USERS = ['fred','wilma','barney'];   // account 25 (all "good for everything")
+  let ws, userIdx=0, signonTries=0, manualClose=false;
+
+  function send(s){ if(ws && ws.readyState===1) ws.send(s); }
+  function doSignon(){
+    signonTries++;
+    const u = USERS[userIdx % USERS.length];
+    statusEl.textContent = 'signing in\u2026';
+    send('signon '+u+',25,user1\r');
+  }
+  function connect(){
+    manualClose=false; signonTries=0; userIdx=Math.floor(Math.random()*USERS.length);
+    ws = new WebSocket('ws://127.0.0.1:7682');
+    ws.onopen = ()=>{
+      statusEl.textContent='connected'; statusEl.classList.add('on');
+      setTimeout(()=>send('\r'), 400);
+      setTimeout(doSignon, 900);
+    };
+    ws.onmessage = (e)=>{
+      const data = e.data; term.write(data);
+      // self-heal: recover from the two things that strand a visitor
+      if(/SIGNON REQUIRED/.test(data) && signonTries < 6){
+        setTimeout(doSignon, 300);
+      } else if(/DUPLICATE USERNAME/.test(data) && signonTries < 6){
+        userIdx++; setTimeout(doSignon, 300);
+      } else if(/OS\/32 TERMINAL MONITOR|^-\s*$/m.test(data)){
+        signonTries=0; statusEl.textContent='ready'; statusEl.classList.add('on');
+      }
+    };
+    ws.onclose = ()=>{ if(manualClose) return;
+      statusEl.textContent='reconnecting'; statusEl.classList.remove('on');
+      setTimeout(connect,1500); };
+    ws.onerror = ()=>{ try{ws.close();}catch(_){}; };
+  }
+  term.onData(d=>send(d));
+  connect();
+
+  // ---- Restart: clean line + fresh sign-in, no waiting on OS/32 to reboot ----
+  document.getElementById('restart').addEventListener('pointerdown', e=>{
+    e.preventDefault();
+    try{ send('signoff\r'); }catch(_){}
+    manualClose=true; try{ ws.close(); }catch(_){}
+    term.reset(); statusEl.textContent='restarting\u2026'; statusEl.classList.remove('on');
+    setTimeout(connect, 400);
+  });
+
+  // ---- tappable command hints ----
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('pointerdown', e=>{ e.preventDefault(); send(c.dataset.cmd+'\r'); });
+  });
+
+  // ---- on-screen keyboard : conventional layout ----
+  // rows of [base, shifted] ; special tokens handled by name
+  const ROWS = [
+    [['1','!'],['2','@'],['3','#'],['4','$'],['5','%'],['6','^'],['7','&'],['8','*'],
+     ['9','('],['0',')'],['-','_'],['=','+'],['BKSP']],
+    [['q','Q'],['w','W'],['e','E'],['r','R'],['t','T'],['y','Y'],['u','U'],['i','I'],
+     ['o','O'],['p','P'],['/','?']],
+    [['a','A'],['s','S'],['d','D'],['f','F'],['g','G'],['h','H'],['j','J'],['k','K'],
+     ['l','L'],[';',':'],["'",'"'],['RET']],
+    [['SHIFT'],['z','Z'],['x','X'],['c','C'],['v','V'],['b','B'],['n','N'],['m','M'],
+     [',','<'],['.','>'],['SHIFT']],
+    [['SPACE']],
+  ];
+  const kbd=document.getElementById('kbd');
+  let shift=false; const shiftKeys=[], letterKeys=[];
+  function setShift(v){ shift=v; shiftKeys.forEach(k=>k.classList.toggle('on',v));
+    letterKeys.forEach(k=>{ k.firstChild.nodeValue = v ? k.dataset.shift : k.dataset.base; });
+  }
+  ROWS.forEach(row=>{
+    const r=document.createElement('div'); r.className='krow';
+    row.forEach(spec=>{
+      const t=spec[0]; const k=document.createElement('button'); k.className='k';
+      if(t==='BKSP'){ k.classList.add('bksp','mod'); k.textContent='⌫'; k.dataset.act='bksp'; }
+      else if(t==='RET'){ k.classList.add('ret'); k.textContent='return ↵'; k.dataset.act='ret'; }
+      else if(t==='SHIFT'){ k.classList.add('mod'); k.textContent='shift'; k.dataset.act='shift'; shiftKeys.push(k); }
+      else if(t==='SPACE'){ k.classList.add('space'); k.textContent='space'; k.dataset.act='space'; }
+      else{
+        const base=spec[0], sh=spec[1]||spec[0];
+        k.dataset.base=base; k.dataset.shift=sh;
+        k.appendChild(document.createTextNode(base));
+        if(/[a-z]/.test(base)) letterKeys.push(k);
+        else if(sh!==base){ const s=document.createElement('span'); s.className='sup'; s.textContent=sh; k.appendChild(s); }
+      }
+      k.addEventListener('pointerdown', e=>{
+        e.preventDefault();
+        const a=k.dataset.act;
+        if(a==='shift'){ setShift(!shift); return; }
+        if(a==='bksp'){ send('\x08'); return; }          // Ctrl-H erases on OS/32
+        if(a==='ret'){ send('\r'); return; }
+        if(a==='space'){ send(' '); return; }
+        send(shift ? k.dataset.shift : k.dataset.base);
+        if(shift) setShift(false);                        // one-shot shift
+        k.classList.add('hold'); setTimeout(()=>k.classList.remove('hold'),90);
+      });
+      r.appendChild(k);
+    });
+    kbd.appendChild(r);
+  });
+  setTimeout(()=>{ try{fit.fit();}catch(e){} }, 60);
+
+  // ---- leaving: sign off cleanly so the next visitor gets a free line ----
+  function signoff(){ try{ send('signoff\r'); }catch(_){}; }
+  document.getElementById('back').addEventListener('pointerdown', e=>{
+    e.preventDefault(); signoff(); setTimeout(()=>location.href='index.html', 150);
+  });
+  addEventListener('pagehide', signoff);
+  ['contextmenu','dragstart','gesturestart'].forEach(ev=>
+    document.addEventListener(ev,e=>e.preventDefault()));
+  </script>
+</body>
+</html>

@@ -1,5 +1,12 @@
 # 3280 Kiosk — Architecture
 
+> **SUPERSEDED IN PART BY REV 3 — see §15 at the bottom before trusting any
+> hardware decision on this page.** Rev 3 removed the doors, moved the UI to a
+> touchscreen, and replaced the Raspberry Pi with a donated x86 mini PC.
+> Sections 1–14 still describe the *software* runtime accurately; the compute
+> platform, the button path, the hinge, and the de-cased monitor do not exist
+> any more.
+
 > **Status: CONCEPT / v1 architecture.** The technical approach we're building
 > toward. Decisions here are recommendations with rationale and alternatives, not
 > frozen specs — revise as the machine is measured and parts are salvaged.
@@ -321,3 +328,47 @@ All six branch points accepted as recommended:
 *Next in the flow: UX (`docs/03-ux.md`) — the screen deck, the button interaction
 model, idle/attract behavior, and the "More detail" path on a spare button. Say
 "let's do the UX" when ready.*
+
+---
+
+## 15. ADR — Rev 3 platform change (2026-09-13)
+
+**Context.** Doug donated a 24" touchscreen and a mini PC. That removed the two
+purchases blocking Rev 3, and simultaneously invalidated four decisions above.
+
+**What changed, and what it costs**
+
+| §  | Was | Now | Why |
+|----|-----|-----|-----|
+| A2.1 | Raspberry Pi 4 (ARM) | donated x86 mini PC | it exists, it is free, and it is faster than the job needs. Specifics unknown until bring-up — see `src/controller/BRINGUP.md` §0. |
+| A2.2 | Raspberry Pi OS Lite | Debian/Ubuntu + X11, no desktop | X11 on purpose: portrait rotation plus touch remapping is one `xrandr` call and one `xinput` matrix. On Wayland it is compositor-specific and moves between releases. An exhibit that must self-recover after a power cut is the wrong place to be clever. |
+| A3.2 | Chromium + loopback static server | Chromium on `file://` | the app is one self-contained file — no `fetch`, no modules, no external reference (`build-kiosk.py` asserts this). A server would be one more thing to die unattended at no benefit. |
+| A4.2 | GPIO buttons → `uinput` synthetic keys | on-screen touch targets | no buttons, no GPIO, no `uinput`, no controller daemon. The largest simplification in the project: an entire electronics subsystem deleted. |
+| A8.4 | de-case the salvaged monitor | cased monitor on an arm | there is no face plate to sit behind any more. |
+
+**What did not change, and this is the point.** The app still speaks exactly
+three commands. `build-kiosk.py` emits a page that answers touch, arrow keys
+and `Home` identically, because the deck never knew what was driving it. If
+touch disappoints on the floor, three switches can come back without a content
+change.
+
+**Consequences accepted**
+
+- **Accessibility regressed and we are choosing it.** Three physical buttons at
+  38" with a light press were tactile, findable without sight, and compliant by
+  construction (ADA §309.4, §308). A touchscreen is none of those. Large
+  targets mitigate; they do not erase. Rick should accept this deliberately,
+  not discover it.
+- **ADA reach stops being a property of the design.** The arm is adjustable, so
+  compliance becomes a property of where somebody last left the screen. Set the
+  height once, lock it, and treat articulation as a *service* feature.
+- **Type got smaller.** Measured, not guessed: the deck was laid out for a
+  230:529 box; a real panel in portrait is 9:16, and the touch bar takes 8.9%
+  more. Body bullets land at 13.6 arcmin at 6 ft against a 16 arcmin comfort
+  threshold — fine at arm's length (33 arcmin), short of Rick's "3–6 ft" bar at
+  the far end. The headline still carries at 6 ft (19 arcmin). Cutting one
+  bullet per screen would buy ~29% more type. That is a content decision.
+- **Read-only overlay root (A2.3) still stands** and matters more, not less: an
+  exhibit that power-cycles nightly will eventually corrupt a writable eMMC.
+
+**Open, and blocking nothing yet:** Gates 1–5 in `BRINGUP.md`.

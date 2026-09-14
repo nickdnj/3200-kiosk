@@ -1,0 +1,12 @@
+[Unit]
+Description=OS/32 websocket-telnet bridge for the kiosk
+After=os32.service
+
+[Service]
+User=vcfed
+ExecStart=/usr/bin/python3 /opt/3280-kiosk/emu/bridge.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

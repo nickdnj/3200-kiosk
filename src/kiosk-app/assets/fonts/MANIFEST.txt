@@ -1,0 +1,16 @@
+Latin-subset woff2, pulled once from Google Fonts and cached here so the
+kiosk renders identically with no network. Regenerate with fetch-fonts.py.
+
+Archivo normal 500  Archivo-500.woff2  34928 bytes
+Archivo normal 600  Archivo-600.woff2  34928 bytes
+Archivo normal 700  Archivo-700.woff2  34928 bytes
+Newsreader italic 400  Newsreader-400i.woff2  24340 bytes
+Newsreader normal 400  Newsreader-400.woff2  58084 bytes
+Newsreader normal 500  Newsreader-500.woff2  58084 bytes
+Newsreader normal 600  Newsreader-600.woff2  58084 bytes
+Oswald normal 400  Oswald-400.woff2  21472 bytes
+Oswald normal 500  Oswald-500.woff2  21472 bytes
+Oswald normal 600  Oswald-600.woff2  21472 bytes
+Oswald normal 700  Oswald-700.woff2  21472 bytes
+Space Mono normal 400  SpaceMono-400.woff2  16520 bytes
+Space Mono normal 700  SpaceMono-700.woff2  16724 bytes
