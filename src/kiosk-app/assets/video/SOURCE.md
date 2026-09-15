@@ -39,8 +39,11 @@ isn't shipped in the shareable artifact).
 - **Source:** "Space Shuttle Launch and Landing Highlights", **NASA**, via
   Internet Archive (`SpaceShuttleLaunchAndLandingHighlights`, 720p).
 - **Rights:** NASA — **public domain**. Credited on-screen.
-- **Honesty note:** the Space link is **MASSCOMP** (its real-time computers were
-  used in the Space Shuttle program), which **Concurrent acquired in 1988** —
-  not the 3280 itself. The slide says exactly that. Flagged for docent review.
+- **Why it's here (the real link, not MASSCOMP):** NASA's **Shuttle Mission
+  Simulator** (astronaut training, Singer-Link built) ran on **Perkin-Elmer
+  8/32** computers per NASA JSC records. The Perkin-Elmer 8/32 is the 3280's
+  direct architecture ancestor (Interdata 8/32 -> Perkin-Elmer -> 3200 series
+  -> 3280), so this machine's own family trained the Shuttle crews. Flagged for
+  docent review; the 8/32 is the ancestor line, not the 3280 model itself.
 - **Cut:** three segments (launch, orbiter-over-Earth ×2), muted, H.264, via the
   same ffmpeg concat recipe as the NOAA loop.
