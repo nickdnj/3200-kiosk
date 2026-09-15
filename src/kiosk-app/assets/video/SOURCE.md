@@ -10,7 +10,7 @@ A 69-second silent loop for the exhibit's Weather screen.
 - **Honesty note:** 2009 NEXRAD did **not** run on a Concurrent 3280 (the 3280
   is 1988; NEXRAD's compute was replaced by then). The screen frames it as
   *the system the Concurrent line helped pioneer*, not as the 3280 itself.
-  Flagged for Rick's docent review like all new exhibit copy.
+  flagged for museum-team review like all new exhibit copy.
 
 ## How it was made
 

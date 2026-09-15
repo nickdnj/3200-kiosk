@@ -357,7 +357,7 @@ change.
 - **Accessibility regressed and we are choosing it.** Three physical buttons at
   38" with a light press were tactile, findable without sight, and compliant by
   construction (ADA §309.4, §308). A touchscreen is none of those. Large
-  targets mitigate; they do not erase. Rick should accept this deliberately,
+  targets mitigate; they do not erase. the museum team should accept this deliberately,
   not discover it.
 - **ADA reach stops being a property of the design.** The arm is adjustable, so
   compliance becomes a property of where somebody last left the screen. Set the
