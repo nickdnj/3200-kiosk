@@ -450,20 +450,43 @@ const CARDS = [
 
   // THE FULL TEAM — from Ken Yeager's letters. Cleared for public display by
   // Ruth Yeager 2026-09-15. De-naming standard honored (some colleagues unnamed).
-  {cls:"ccard", html:`<div class="ek">The team &middot; from Ken Yeager&rsquo;s letters</div>
-    <h2>Who built the 3280</h2>
+  // THE CRUNCHER 2 TEAM - the 15 design engineers of record. Roles from Ken
+  // Yeager's letters home (cleared by Ruth Yeager 2026-09-15); roster per the
+  // 2026-07 poster research (team-backgrounds.md). De-naming standard honored.
+  {cls:"ccard", html:`<div class="ek">The team &middot; Cruncher 2</div>
+    <h2>Fifteen engineers, one lab</h2>
     <ul class="roster">
-      <li><span class="nm">Ken Yeager</span> &mdash; <span class="rl">Architect</span></li>
-      <li><span class="nm">Hampton Sailor &amp; Rich Chirumbolo</span> &mdash; <span class="rl">Instruction fetch</span></li>
+      <li><span class="nm">Ken Yeager</span> &mdash; <span class="rl">Chief architect</span></li>
+      <li><span class="nm">Hampton Sailor</span> &mdash; <span class="rl">Instruction fetch</span></li>
+      <li><span class="nm">Rich Chirumbolo</span> &mdash; <span class="rl">Instruction fetch</span></li>
       <li><span class="nm">Tony Catanzaro</span> &mdash; <span class="rl">Address translation</span></li>
       <li><span class="nm">Brent Bush</span> &mdash; <span class="rl">Execution unit</span></li>
-      <li><span class="nm">Walt Gan</span> &mdash; <span class="rl">Engineer</span></li>
-      <li><span class="nm">Rocco Brescia</span> &mdash; <span class="rl">Senior engineer</span></li>
-      <li><span class="nm">Jim Hodge</span> &mdash; <span class="rl">Barrel shifter</span></li>
-      <li><span class="nm">Mike Martone</span> &mdash; <span class="rl">Built it &middot; OS bring-up</span></li>
-      <li><span class="nm">Dan Masi</span> &mdash; <span class="rl">Engineer</span></li>
+      <li><span class="nm">Rocco Brescia</span> &mdash; <span class="rl">Execution unit</span></li>
+      <li><span class="nm">Denny Zdrazil</span> &mdash; <span class="rl">S&#8209;bus interface</span></li>
+      <li><span class="nm">Mike Mangione</span> &mdash; <span class="rl">Memory &amp; bus expander</span></li>
+      <li><span class="nm">Jack Harwood</span> &mdash; <span class="rl">Memory &amp; bus expander</span></li>
+      <li><span class="nm">Bob Reago</span> &mdash; <span class="rl">Memory interface</span></li>
+      <li><span class="nm">Dan Masi</span> &mdash; <span class="rl">Microcode</span></li>
+      <li><span class="nm">Bob Philhower</span> &mdash; <span class="rl">Microcode</span></li>
+      <li><span class="nm">Mike Martone</span> &mdash; <span class="rl">Lab bring&#8209;up &amp; first field install</span></li>
+      <li><span class="nm">Dan Neim</span> &mdash; <span class="rl">Project manager</span></li>
+      <li><span class="nm">Yuk&#8209;Ming Lam</span> &mdash; <span class="rl">Program manager</span></li>
     </ul>
-    <div class="morep">Sourced from Ken Yeager&rsquo;s letters home, 1979&ndash;1989</div>`},
+    <div class="morep">&hellip;and the technicians who wired, cut, strapped and reworked every board &middot; roles from Ken Yeager&rsquo;s letters home</div>`},
+
+  // WHERE THEY WENT - the connections. Public professional records (ACM/IEEE,
+  // patents, LinkedIn); Cypress per Nick DeMarco (firsthand); Philhower per his
+  // public IBM bio (MEDIUM: bio does not itself name Concurrent).
+  {cls:"ccard", html:`<div class="ek">The team &middot; afterward</div>
+    <h2>Where they went</h2>
+    <ul class="blist">
+      <li><b>Ken Yeager</b> &rarr; MIPS &amp; SGI: architect of the <b>R10000</b> &mdash; the chip in this museum&rsquo;s Onyx</li>
+      <li><b>Bob Philhower</b> &rarr; IBM: the processors inside the <b>PlayStation&nbsp;3 &amp; Xbox&nbsp;360</b>, and POWER4&ndash;11</li>
+      <li><b>Chirumbolo &amp; Bush</b> &rarr; <b>Cypress Semiconductor</b></li>
+      <li><b>Hampton Sailor</b> &rarr; Conexant, <b>Red Bank</b> &mdash; a few miles from this lab</li>
+      <li><b>Mike Martone</b> &rarr; forty years on, posted the <b>lab phone list</b> that started this exhibit</li>
+    </ul>
+    <div class="morep">Public professional records &middot; Cypress per Nick DeMarco &middot; Philhower per his public IBM bio</div>`},
 
   {cls:"ccard", html:`<div class="ek">A quiet first</div>
     <h2>The line that set Unix free</h2>
