@@ -202,6 +202,20 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Newsreader",Geo
 .ticker .run i{color:#e46a4a;font-style:normal}
 @keyframes tick{from{transform:translateX(6cqw)}to{transform:translateX(-100%)}}
 
+/* bring-up slide: CRUNCHER LIVES in the snow - typographic hero until an image lands */
+.snow{position:relative;width:100%;aspect-ratio:16/10;border-radius:3px;overflow:hidden;margin:0 0 4.5cqw;
+  background:linear-gradient(180deg,#0c1220 0%,#1c2536 38%,#6f7d92 55%,#dfe6ee 62%,#f3f6f9 100%);
+  box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.snow .lamp{position:absolute;top:9%;left:70%;width:26cqw;height:26cqw;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,196,110,.55),rgba(255,196,110,0) 62%)}
+.snow .word{position:absolute;left:5%;right:5%;top:56%;transform:rotate(-4deg) skewX(-6deg);
+  font-family:"Archivo",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  font-size:clamp(14px,9.2cqw,38px);line-height:.95;color:#5a6577;
+  text-shadow:0 1px 0 #ffffff,0 -1px 0 #9aa6b6,0 2px 6px rgba(60,72,90,.35)}
+.snow .word b{display:block;color:#4b5668}
+.snow .cap{position:absolute;left:4%;bottom:3.5%;font-family:"Oswald",sans-serif;text-transform:uppercase;
+  letter-spacing:.14em;font-size:clamp(7px,2.7cqw,10px);color:#6b7686}
+
 
 /* three real buttons — transparent hotspots over the drawn controls */
 .hotbtn{position:absolute;width:9.8%;aspect-ratio:1;transform:translate(-50%,-50%);
@@ -475,6 +489,22 @@ const CARDS = [
       <li><span class="nm">Yuk&#8209;Ming Lam</span> &mdash; <span class="rl">Program manager</span></li>
     </ul>
     <div class="morep">&hellip;and the technicians who wired, cut, strapped and reworked every board &middot; roles from Ken Yeager&rsquo;s letters &middot; later careers from public records</div>`},
+
+  // BRING-UP - the year the boards became a computer, and CRUNCHER LIVES.
+  // Dates and the quoted line are from Ken Yeager's letters (Ruth-cleared).
+  // Hero is a typographic treatment: no photograph of the snow survives.
+  {cls:"ccard", html:`<div class="ek">Bring&#8209;up &middot; 1985&ndash;86</div>
+    <h2>Cruncher lives</h2>
+    <div class="snow"><span class="lamp"></span>
+      <div class="word">Cruncher<b>lives</b></div>
+      <span class="cap">Monmouth County, NJ &middot; February 1986</span></div>
+    <ul class="blist">
+      <li><b>Jan 30, 1985</b> &mdash; the pipeline runs its first three instructions. &ldquo;<b>It was great!</b>&rdquo;</li>
+      <li>The first real program printed <b>&ldquo;Gans&rdquo;</b> &mdash; for the engineer who felled trees on weekends</li>
+      <li><b>Jan 1986</b> &mdash; the OS boots; the benchmark runs <b>3&times; faster</b> than the machine it replaced</li>
+      <li>That week two engineers stomped <b>CRUNCHER LIVES</b> into the snow, twelve feet high. It rained Monday.</li>
+    </ul>
+    <div class="morep">From Ken Yeager&rsquo;s letters home &middot; illustration &mdash; no photograph of the snow survives</div>`},
 
   {cls:"ccard", html:`<div class="ek">A quiet first</div>
     <h2>The line that set Unix free</h2>
