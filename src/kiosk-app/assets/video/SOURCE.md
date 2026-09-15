@@ -39,7 +39,8 @@ isn't shipped in the shareable artifact).
 - **Source:** "Space Shuttle Launch and Landing Highlights", **NASA**, via
   Internet Archive (`SpaceShuttleLaunchAndLandingHighlights`, 720p).
 - **Rights:** NASA — **public domain**. Credited on-screen.
-- **Why it's here (the real link, not MASSCOMP):** NASA's **Shuttle Mission
+- **Why it's here (upgraded 2026-09-15, Yeager letters, Ruth-cleared):** the SMS first ran on 27 Interdata 8/32 processors; **three Concurrent 3280s (MPS configuration) replaced all 27.** Earlier framing below kept for history.
+- **Earlier framing:** NASA's **Shuttle Mission
   Simulator** (astronaut training, Singer-Link built) ran on **Perkin-Elmer
   8/32** computers per NASA JSC records. The Perkin-Elmer 8/32 is the 3280's
   direct architecture ancestor (Interdata 8/32 -> Perkin-Elmer -> 3200 series
@@ -86,7 +87,6 @@ in case it returns; not referenced by any screen.
   report, Dec 1979*, which also sampled "a supplier of systems for banks" among
   users and cites 2,500 installed 32-bit systems. "Many operating order-routing
   systems were overwhelmed during the 1987 stock market crash" — *U.S. Office
-  of Technology Assessment, 1990*. No single named NYSE/bank customer is in the
-  public record; flagged for docent review (Nick may know one).
+  of Technology Assessment, 1990*. **Telerate** (the financial-data/market-feed company) is named as a 3280-line customer in Ken Yeager's letters (poster-plan.md, verified/line-cited). Beyond that, no single named NYSE/bank customer is in the public record; flagged for docent review (Nick may know one).
 - **Cut:** four segments (wide floor / overhead post / crowded post / clerk's
   slips), 640x480, muted, H.264, ffmpeg concat.
