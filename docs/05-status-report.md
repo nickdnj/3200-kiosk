@@ -53,7 +53,7 @@ installed, soaked, or signed off.
 | Interaction | Three on-screen touch targets: BACK / HOME / NEXT. Arrow keys and `Home` drive it identically. No swipe, no gestures |
 | Display | Acer T232HL, 23″ IPS touch, 1080 × 1920 portrait |
 | Compute | Dell OptiPlex 9020M, Ubuntu 24.04, X11, Chromium kiosk, `file://`, offline in production |
-| Content | 16 screens in `src/kiosk-app/_deck.py`, plus a live OS/32 terminal |
+| Content | 22 screens in `src/kiosk-app/_deck.py`, plus a live OS/32 terminal |
 | Content bar | Docent-set: ~30% of web copy, 3–5 bullets/screen, big sans-serif, readable at 3–6 ft, verified facts only |
 | Touch row | 38″ above finished floor, set by ADA §308. Unchanged from Rev 1 |
 | Hard constraint | The 3280 is a **museum artifact**. Reversible and non-destructive, always |
@@ -71,7 +71,7 @@ concept art; the copy survived the pivot verbatim, the art did not.
 
 | Piece | State | Where |
 |---|---|---|
-| Deck content | 16 screens, all pass the fit check, tightest content screen 6.9% slack | `src/kiosk-app/_deck.py` |
+| Deck content | 22 screens, all pass the fit check, tightest content screen 6.9% slack | `src/kiosk-app/_deck.py` |
 | Panel build | Self-contained 1080 × 1920 page, fonts and images inlined, asserts no network reference survives | `build-kiosk.py` → `dist/kiosk/index.html` |
 | Fit check | Renders the real build in headless Chrome and measures every screen against its box | `check-fit.py` |
 | Concept review page | Same content in the cabinet mock-up, for review | `build-app.py` → `index.html` |
@@ -91,15 +91,26 @@ concept art; the copy survived the pivot verbatim, the art did not.
 | 4 | · space | It trained the Shuttle crews |
 | 5 | · finance | Built to never drop a trade |
 | 6 | Under the hood | Big iron, built by hand |
-| 7 | Where it was born | Made in Monmouth County |
-| 8 | · lineage | Sixty years, one New Jersey lab |
-| 9 | Who built it | Built by a small team |
-| 10 | The team | Sixteen engineers, one lab (the Cruncher 2 roster) |
-| 11 | Bring-up | Cruncher lives (1985–86, with the CRUNCHER LIVES illustration) |
-| 12 | A quiet first | The line that set Unix free |
-| 13 | Just down the room | Two machines, one designer (cross-link to the SGI Onyx) |
-| 14–16 | Open it up | Three full-bleed photographs of the card cage, processor, memory and control |
-| 17 | Try it yourself | The OS/32 terminal |
+| 7 | · the system | Four boards, one bus (block diagram: processor, S-bus, memory, I/O) |
+| 8 | · the processor | One processor, four boards (FET / VAT / ALU / MPY + the four-stage pipeline) |
+| 9–12 | · FET · VAT · ALU · MPY | One screen per board: what it does, a diagram, who built it |
+| 13 | Where it was born | Made in Monmouth County |
+| 14 | · lineage | Sixty years, one New Jersey lab |
+| 15 | Who built it | Built by a small team |
+| 16 | The team | Sixteen engineers, one lab (the Cruncher 2 roster) |
+| 17 | Bring-up | Cruncher lives (1985–86, with the CRUNCHER LIVES illustration) |
+| 18 | A quiet first | The line that set Unix free |
+| 19 | Just down the room | Two machines, one designer (cross-link to the SGI Onyx) |
+| 20–22 | Open it up | Three full-bleed photographs of the card cage, processor, memory and control |
+| 23 | Try it yourself | The OS/32 terminal |
+
+The six architecture screens (added 2026-09-15) are sourced from Concurrent's
+own manuals on bitsavers. *System Bus Theory* 63-002 R00 (1987) Fig. 1-1 names
+the four processor boards **VAT / FET / ALU / MPY**; the *Product Overview*
+50-045R00 (1989) pp.29–35 gives the four-board processor, the pipeline stages,
+caches, prefetch, multiplier and register sets. This corrects the wiki's
+earlier inference that the boards were FETCH / DECODE / ALU / WRITE-BACK; the
+wiki has not yet been updated.
 
 Two slides were removed on purpose: the multiprocessor slide (the museum's
 unit is a 3280, not the 3280E MPS) and the Defense slide (at Nick's request).

@@ -5,7 +5,7 @@
 > and nowhere else. The cabinet imagery on the concept page is AI concept art.
 > Keep the "Concept" marker until the piece is built and installed.
 
-Sixteen screens telling the Concurrent 3280's story, plus a seventeenth that
+Twenty-two screens telling the Concurrent 3280's story, plus a final one that
 hands the visitor a live OS/32 terminal (see `../emulator/`). Driven by
 **three commands — BACK / HOME / NEXT**. As of Rev 3 those are on-screen touch
 targets rather than physical switches, but the deck itself never knew the
@@ -35,12 +35,21 @@ reviewed words, so they cannot drift apart. Never hand-edit a generated
 | 2 | What it did | One machine, many jobs |
 | 3–5 | · weather · space · finance | NEXRAD radar, Shuttle training, trading floors. Real footage, public domain or sourced |
 | 6 | Under the hood | Big iron, built by hand |
-| 7–8 | Where it was born | Monmouth County; the sixty-year lab lineage |
-| 9–11 | Who built it | The small team; the Cruncher 2 roster; the 1985–86 bring-up |
-| 12 | A quiet first | The line that set Unix free |
-| 13 | Just down the room | Cross-link to the SGI Onyx |
-| 14–16 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
-| 17 | Try it yourself | The OS/32 terminal |
+| 7–8 | · the system · the processor | Inline-SVG block diagrams: S-bus, memory, I/O; the four boards and the four-stage pipeline |
+| 9–12 | · FET · VAT · ALU · MPY | One screen per processor board, with a diagram of what it does and who built it |
+| 13–14 | Where it was born | Monmouth County; the sixty-year lab lineage |
+| 15–17 | Who built it | The small team; the Cruncher 2 roster; the 1985–86 bring-up |
+| 18 | A quiet first | The line that set Unix free |
+| 19 | Just down the room | Cross-link to the SGI Onyx |
+| 20–22 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
+| 23 | Try it yourself | The OS/32 terminal |
+
+The architecture screens are drawn from Concurrent's own manuals on bitsavers:
+*System Bus Theory* 63-002 R00 (1987), whose Fig. 1-1 names the four processor
+boards **VAT / FET / ALU / MPY**, and the *3280 Product Overview* 50-045R00
+(1989) pp.29–35. The manuals never say one board equals one pipeline stage,
+so the deck does not either. The diagrams are inline SVG in the screen
+palette, so they scale with the panel like everything else.
 
 The team and bring-up screens draw on Ken Yeager's letters and were cleared
 for public by Ruth Yeager (2026-09-15).

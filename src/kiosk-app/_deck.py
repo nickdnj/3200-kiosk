@@ -178,6 +178,20 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
 .blist li::before{content:"";position:absolute;left:0;top:.5em;width:2.8cqw;height:2.8cqw;
   background:var(--screen-accent);border-radius:1px;transform:rotate(45deg)}
 .blist b{color:var(--screen-accent)}
+/* architecture diagrams: inline SVG in the same box as .cimg. Colors are the
+   screen palette so they hold up on the panel and the concept page alike. */
+.diag{width:100%;aspect-ratio:16/10;border-radius:3px;overflow:hidden;background:#ebe4d1;margin:0 0 4.5cqw;
+  box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.diag svg{width:100%;height:100%;display:block;font-family:"Oswald",sans-serif}
+.diag .bx{fill:#f7f2e4;stroke:var(--screen-ink);stroke-width:.8}
+.diag .bx.hot{fill:var(--screen-accent);stroke:var(--screen-accent)}
+.diag .bx.dim{fill:#ddd5c0;stroke:#b8ae95}
+.diag .ln{stroke:var(--screen-ink);stroke-width:.8;fill:none}
+.diag .ln.hot{stroke:var(--screen-accent);stroke-width:1.3}
+.diag .t{fill:var(--screen-ink);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.diag .t.w{fill:#f7f2e4} .diag .t.a{fill:var(--screen-accent)}
+.diag .s{fill:var(--screen-mut);font-family:"Archivo",sans-serif;font-weight:500}
+.diag .s.w{fill:#f1e9d4}
 /* animated NEXRAD-style Doppler scope - CSS only, loops forever */
 .radar-wrap{display:flex;flex-direction:column;align-items:center;gap:3cqw;margin:1cqw 0 4cqw}
 .radar{position:relative;width:70cqw;height:70cqw;border-radius:50%;
@@ -239,7 +253,7 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
   letter-spacing:.14em;font-size:clamp(7px,2.7cqw,10px);color:#6b7686}
 """
 
-# ---- what the screens say. Nine of them, in order.
+# ---- what the screens say, in order.
 CARDS_JS = r"""const CARDS = [
   // HOME &mdash; the whole story in one screen
   {cls:"ccard", html:`<h2>The Concurrent 3280 was made in New Jersey<span class="h2sub">Deployed everywhere &middot; 1981&ndash;1986</span></h2>
@@ -305,6 +319,214 @@ CARDS_JS = r"""const CARDS = [
       <li>Built for jobs <b>too big for any desktop</b></li>
       <li>Its big brother, the <b>3280E</b>, grew to <b>12 processors</b> working as one</li>
       <li>Every circuit board <b>wired by hand</b></li>
+    </ul>`},
+
+  // ARCHITECTURE - six screens. Every fact below is from Concurrent's own
+  // manuals: 63-002 R00 "System Bus Theory" (1987) Fig. 1-1 names the four
+  // processor boards VAT / FET / ALU / MPY and the S-bus T-path / F-path at
+  // 10 MHz; 50-045R00 "3280 Product Overview" (1989) pp.29-35 gives "four
+  // processor boards", the four pipeline stages, the instruction/data caches
+  // and prefetch, the parallel multiplier, the register sets, and the 6.4 MIPS
+  // Whetstone rating. Engineers per the roster screen (Ken Yeager's letters,
+  // cleared by Ruth Yeager). The manuals do not say one board = one pipeline
+  // stage, so the deck doesn't either.
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; the system</div>
+    <h2>Four boards, one bus</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="3280 system block diagram">
+      <defs><marker id="arA" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <rect class="bx hot" x="5" y="10" width="58" height="80" rx="1.5"/>
+      <text class="t w" x="34" y="20" font-size="5.4" text-anchor="middle">Processor</text>
+      <g font-size="4.8" text-anchor="middle">
+        <rect class="bx" x="11" y="25" width="46" height="10" rx="1"/><text class="t" x="34" y="32">FET</text>
+        <rect class="bx" x="11" y="37" width="46" height="10" rx="1"/><text class="t" x="34" y="44">VAT</text>
+        <rect class="bx" x="11" y="49" width="46" height="10" rx="1"/><text class="t" x="34" y="56">ALU</text>
+        <rect class="bx" x="11" y="61" width="46" height="10" rx="1"/><text class="t" x="34" y="68">MPY</text>
+      </g>
+      <text class="s w" x="34" y="80" font-size="3.4" text-anchor="middle">four boards, one ribbon cable</text>
+      <text class="s w" x="34" y="85.5" font-size="3.4" text-anchor="middle">to the bus</text>
+      <line class="ln" x1="63" y1="50" x2="80" y2="50"/>
+      <line class="ln hot" x1="80" y1="6" x2="80" y2="94" marker-end="url(#arA)"/>
+      <line class="ln hot" x1="92" y1="94" x2="92" y2="6" marker-end="url(#arA)"/>
+      <text class="t a" transform="rotate(-90 86 50)" x="86" y="51.5" font-size="4" text-anchor="middle">S&#8209;bus &middot; 10 MHz</text>
+      <line class="ln" x1="92" y1="26" x2="104" y2="26"/>
+      <rect class="bx" x="104" y="12" width="51" height="28" rx="1.5"/>
+      <text class="t" x="129.5" y="24" font-size="5" text-anchor="middle">Memory</text>
+      <text class="s" x="129.5" y="33" font-size="3.6" text-anchor="middle">8 to 32 MB</text>
+      <line class="ln" x1="92" y1="72" x2="104" y2="72"/>
+      <rect class="bx" x="104" y="56" width="51" height="32" rx="1.5"/>
+      <text class="t" x="129.5" y="68" font-size="5" text-anchor="middle">I/O</text>
+      <text class="s" x="129.5" y="76.5" font-size="3.6" text-anchor="middle">disks &middot; tapes</text>
+      <text class="s" x="129.5" y="82" font-size="3.6" text-anchor="middle">terminals</text>
+    </svg></div>
+    <div class="cimcap">Concurrent Computer Corp. manuals, 1987&ndash;89</div>
+    <ul class="blist">
+      <li>The processor is <b>four boards</b>, joined to the bus by one ribbon cable</li>
+      <li>A <b>10 MHz bus</b> with two one&#8209;way lanes: to memory, and back</li>
+      <li>Everything else &mdash; <b>disks, tapes, terminals</b> &mdash; hangs off the I/O side</li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; the processor</div>
+    <h2>One processor, four boards</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="The four processor boards and the four-stage pipeline">
+      <defs><marker id="arB" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <g text-anchor="middle">
+        <rect class="bx hot" x="4" y="6" width="36" height="42" rx="1.5"/>
+        <text class="t w" x="22" y="24" font-size="7.5">FET</text>
+        <text class="s w" x="22" y="32" font-size="3.5">reads the</text><text class="s w" x="22" y="37" font-size="3.5">next instruction</text>
+        <rect class="bx hot" x="43" y="6" width="36" height="42" rx="1.5"/>
+        <text class="t w" x="61" y="24" font-size="7.5">VAT</text>
+        <text class="s w" x="61" y="32" font-size="3.5">finds where</text><text class="s w" x="61" y="37" font-size="3.5">data lives</text>
+        <rect class="bx hot" x="82" y="6" width="36" height="42" rx="1.5"/>
+        <text class="t w" x="100" y="24" font-size="7.5">ALU</text>
+        <text class="s w" x="100" y="32" font-size="3.5">adds, compares,</text><text class="s w" x="100" y="37" font-size="3.5">decides</text>
+        <rect class="bx hot" x="121" y="6" width="36" height="42" rx="1.5"/>
+        <text class="t w" x="139" y="24" font-size="7.5">MPY</text>
+        <text class="s w" x="139" y="32" font-size="3.5">multiplies,</text><text class="s w" x="139" y="37" font-size="3.5">in hardware</text>
+      </g>
+      <text class="t" x="80" y="62" font-size="3.8" text-anchor="middle" letter-spacing=".12em">The pipeline &middot; four stages</text>
+      <g font-size="3.6" text-anchor="middle">
+        <rect class="bx" x="4" y="68" width="34" height="18" rx="1"/><text class="t" x="21" y="76">1 fetch</text><text class="s" x="21" y="82">instruction</text>
+        <line class="ln" x1="38" y1="77" x2="43" y2="77" marker-end="url(#arB)"/>
+        <rect class="bx" x="44" y="68" width="34" height="18" rx="1"/><text class="t" x="61" y="76">2 address</text><text class="s" x="61" y="82">calculation</text>
+        <line class="ln" x1="78" y1="77" x2="83" y2="77" marker-end="url(#arB)"/>
+        <rect class="bx" x="84" y="68" width="34" height="18" rx="1"/><text class="t" x="101" y="76">3 fetch</text><text class="s" x="101" y="82">operand</text>
+        <line class="ln" x1="118" y1="77" x2="123" y2="77" marker-end="url(#arB)"/>
+        <rect class="bx" x="124" y="68" width="33" height="18" rx="1"/><text class="t" x="140.5" y="76">4 execute</text><text class="s" x="140.5" y="82">result</text>
+      </g>
+      <text class="s" x="80" y="95" font-size="3.4" text-anchor="middle">four instructions in flight at once, one per stage</text>
+    </svg></div>
+    <div class="cimcap">Board names as Concurrent drew them, 1987</div>
+    <ul class="blist">
+      <li><b>FET</b> reads ahead &middot; <b>VAT</b> finds addresses</li>
+      <li><b>ALU</b> does the arithmetic &middot; <b>MPY</b> multiplies</li>
+      <li>Four instructions <b>in flight at once</b>, one per stage</li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; FET &middot; board 1 of 4</div>
+    <h2>The board that reads ahead</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="FET: instruction fetch with prefetch and cache">
+      <defs><marker id="arC" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <rect class="bx dim" x="4" y="26" width="34" height="48" rx="1.5"/>
+      <text class="t" x="21" y="46" font-size="4.6" text-anchor="middle">Main</text><text class="t" x="21" y="53" font-size="4.6" text-anchor="middle">memory</text>
+      <text class="s" x="21" y="62" font-size="3.2" text-anchor="middle">slow, far away</text>
+      <line class="ln" x1="38" y1="50" x2="50" y2="50" marker-end="url(#arC)"/>
+      <rect class="bx hot" x="51" y="12" width="66" height="76" rx="1.5"/>
+      <text class="t w" x="84" y="22" font-size="6" text-anchor="middle">FET</text>
+      <rect class="bx" x="57" y="28" width="54" height="22" rx="1"/>
+      <text class="t" x="84" y="37" font-size="4" text-anchor="middle">Prefetch</text>
+      <text class="s" x="84" y="44" font-size="3.2" text-anchor="middle">asks for the next one early</text>
+      <line class="ln" x1="84" y1="50" x2="84" y2="55" marker-end="url(#arC)"/>
+      <rect class="bx" x="57" y="56" width="54" height="26" rx="1"/>
+      <text class="t" x="84" y="66" font-size="4" text-anchor="middle">Instruction cache</text>
+      <text class="s" x="84" y="73" font-size="3.2" text-anchor="middle">a fast local copy</text>
+      <text class="s" x="84" y="78.5" font-size="3.2" text-anchor="middle">at processor speed</text>
+      <line class="ln" x1="117" y1="50" x2="130" y2="50" marker-end="url(#arC)"/>
+      <rect class="bx" x="131" y="34" width="25" height="32" rx="1.5"/>
+      <text class="t" x="143.5" y="47" font-size="3.6" text-anchor="middle">Next</text><text class="t" x="143.5" y="53" font-size="3.6" text-anchor="middle">stage</text>
+    </svg></div>
+    <div class="cimcap">Instruction fetch &middot; Concurrent 50&#8209;045R00, 1989</div>
+    <ul class="blist">
+      <li>Reads the <b>next instructions</b> before they are asked for</li>
+      <li>Its own <b>cache</b> means most fetches never wait for main memory</li>
+      <li><b>Hampton Sailor</b> &amp; <b>Rich Chirumbolo</b>, instruction fetch</li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; VAT &middot; board 2 of 4</div>
+    <h2>The board that finds things</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="VAT: virtual address translation">
+      <defs><marker id="arD" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <rect class="bx dim" x="4" y="30" width="36" height="40" rx="1.5"/>
+      <text class="t" x="22" y="44" font-size="4" text-anchor="middle">Program</text><text class="t" x="22" y="50" font-size="4" text-anchor="middle">address</text>
+      <text class="s" x="22" y="59" font-size="3.2" text-anchor="middle">what the code says</text>
+      <line class="ln" x1="40" y1="50" x2="50" y2="50" marker-end="url(#arD)"/>
+      <rect class="bx hot" x="51" y="12" width="62" height="76" rx="1.5"/>
+      <text class="t w" x="82" y="22" font-size="6" text-anchor="middle">VAT</text>
+      <text class="s w" x="82" y="28.5" font-size="3.2" text-anchor="middle">virtual address translation</text>
+      <g class="bx"><rect x="57" y="33" width="50" height="48" rx="1"/></g>
+      <g class="ln" stroke-width=".5"><line x1="57" y1="41" x2="107" y2="41"/><line x1="57" y1="49" x2="107" y2="49"/><line x1="57" y1="57" x2="107" y2="57"/><line x1="57" y1="65" x2="107" y2="65"/><line x1="57" y1="73" x2="107" y2="73"/><line x1="82" y1="33" x2="82" y2="73"/></g>
+      <g class="s" font-size="3" text-anchor="middle">
+        <text x="69.5" y="38.6" class="t" font-size="3">program</text><text x="94.5" y="38.6" class="t" font-size="3">real</text>
+        <text x="69.5" y="46.5">page 12</text><text x="94.5" y="46.5">frame 803</text>
+        <text x="69.5" y="54.5">page 13</text><text x="94.5" y="54.5">frame 91</text>
+        <text x="69.5" y="62.5">page 14</text><text x="94.5" y="62.5">frame 2 210</text>
+        <text x="69.5" y="70.5">page 15</text><text x="94.5" y="70.5">frame 77</text>
+        <text x="82" y="78.5">recent lookups, kept on the board</text>
+      </g>
+      <line class="ln" x1="113" y1="50" x2="123" y2="50" marker-end="url(#arD)"/>
+      <rect class="bx" x="124" y="30" width="32" height="40" rx="1.5"/>
+      <text class="t" x="140" y="44" font-size="4" text-anchor="middle">Real</text><text class="t" x="140" y="50" font-size="4" text-anchor="middle">memory</text>
+      <text class="s" x="140" y="59" font-size="3.2" text-anchor="middle">where it is</text>
+    </svg></div>
+    <div class="cimcap">Address translation &middot; Concurrent 63&#8209;002, 1987</div>
+    <ul class="blist">
+      <li>Programs use <b>virtual addresses</b>; VAT turns them into real ones</li>
+      <li><b>32&#8209;bit addresses</b>: four billion places to look</li>
+      <li><b>Tony Catanzaro</b>, address translation</li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; ALU &middot; board 3 of 4</div>
+    <h2>Where the arithmetic happens</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="ALU: registers feeding the arithmetic and logic unit">
+      <defs><marker id="arE" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <rect class="bx hot" x="4" y="8" width="152" height="84" rx="1.5"/>
+      <text class="t w" x="80" y="18" font-size="6" text-anchor="middle">ALU</text>
+      <rect class="bx" x="10" y="24" width="52" height="56" rx="1"/>
+      <text class="t" x="36" y="31" font-size="3.6" text-anchor="middle">Registers</text>
+      <g fill="#c9bfa4" stroke="#8f8468" stroke-width=".3">
+        <rect x="14" y="34.5" width="10" height="4.4"/><rect x="25" y="34.5" width="10" height="4.4"/><rect x="36" y="34.5" width="10" height="4.4"/><rect x="47" y="34.5" width="10" height="4.4"/>
+        <rect x="14" y="39.8" width="10" height="4.4"/><rect x="25" y="39.8" width="10" height="4.4"/><rect x="36" y="39.8" width="10" height="4.4"/><rect x="47" y="39.8" width="10" height="4.4"/>
+        <rect x="14" y="45.1" width="10" height="4.4"/><rect x="25" y="45.1" width="10" height="4.4"/><rect x="36" y="45.1" width="10" height="4.4"/><rect x="47" y="45.1" width="10" height="4.4"/>
+        <rect x="14" y="50.4" width="10" height="4.4"/><rect x="25" y="50.4" width="10" height="4.4"/><rect x="36" y="50.4" width="10" height="4.4"/><rect x="47" y="50.4" width="10" height="4.4"/>
+        <rect x="14" y="55.7" width="10" height="4.4"/><rect x="25" y="55.7" width="10" height="4.4"/><rect x="36" y="55.7" width="10" height="4.4"/><rect x="47" y="55.7" width="10" height="4.4"/>
+        <rect x="14" y="61.0" width="10" height="4.4"/><rect x="25" y="61.0" width="10" height="4.4"/><rect x="36" y="61.0" width="10" height="4.4"/><rect x="47" y="61.0" width="10" height="4.4"/>
+        <rect x="14" y="66.3" width="10" height="4.4"/><rect x="25" y="66.3" width="10" height="4.4"/><rect x="36" y="66.3" width="10" height="4.4"/><rect x="47" y="66.3" width="10" height="4.4"/>
+        <rect x="14" y="71.6" width="10" height="4.4"/><rect x="25" y="71.6" width="10" height="4.4"/><rect x="36" y="71.6" width="10" height="4.4"/><rect x="47" y="71.6" width="10" height="4.4"/>
+      </g>
+      <text class="s w" x="36" y="86" font-size="3" text-anchor="middle">8 sets of 16 &middot; 32&#8209;bit</text>
+      <line class="ln" x1="62" y1="44" x2="72" y2="44" marker-end="url(#arE)"/>
+      <line class="ln" x1="62" y1="66" x2="72" y2="66" marker-end="url(#arE)"/>
+      <path class="bx" d="M73 34 L109 44 L109 66 L73 76 L73 58 L80 55 L73 52 Z"/>
+      <text class="t" x="93" y="53" font-size="4.2" text-anchor="middle">+ &minus; =</text>
+      <text class="s" x="93" y="60" font-size="3" text-anchor="middle">compare, decide</text>
+      <line class="ln" x1="109" y1="55" x2="120" y2="55" marker-end="url(#arE)"/>
+      <rect class="bx" x="121" y="42" width="30" height="26" rx="1"/>
+      <text class="t" x="136" y="57" font-size="4" text-anchor="middle">Result</text>
+      <text class="s w" x="112" y="86" font-size="3" text-anchor="middle">floating point: 8 single + 8 double registers</text>
+    </svg></div>
+    <div class="cimcap">Execution &middot; Concurrent 50&#8209;045R00, 1989</div>
+    <ul class="blist">
+      <li>The <b>execution stage</b>: add, subtract, compare, decide</li>
+      <li><b>Eight sets</b> of registers, so an interrupt switches in without saving anything</li>
+      <li><b>Brent Bush</b> &amp; <b>Rocco Brescia</b>, execution unit</li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; MPY &middot; board 4 of 4</div>
+    <h2>A board just to multiply</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="MPY: the parallel multiplier">
+      <defs><marker id="arF" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#3b3325"/></marker></defs>
+      <rect class="bx" x="6" y="18" width="30" height="22" rx="1"/>
+      <text class="t" x="21" y="32" font-size="6" text-anchor="middle">A</text>
+      <rect class="bx" x="6" y="60" width="30" height="22" rx="1"/>
+      <text class="t" x="21" y="74" font-size="6" text-anchor="middle">B</text>
+      <line class="ln" x1="36" y1="29" x2="58" y2="44" marker-end="url(#arF)"/>
+      <line class="ln" x1="36" y1="71" x2="58" y2="56" marker-end="url(#arF)"/>
+      <rect class="bx hot" x="59" y="12" width="52" height="76" rx="1.5"/>
+      <text class="t w" x="85" y="22" font-size="6" text-anchor="middle">MPY</text>
+      <circle cx="85" cy="50" r="15" fill="#f7f2e4" stroke="#f7f2e4"/>
+      <text class="t" x="85" y="57" font-size="18" text-anchor="middle">&times;</text>
+      <text class="s w" x="85" y="75" font-size="3.2" text-anchor="middle">parallel multiplier</text>
+      <text class="s w" x="85" y="80.5" font-size="3.2" text-anchor="middle">one pass, not a loop of adds</text>
+      <line class="ln" x1="111" y1="50" x2="122" y2="50" marker-end="url(#arF)"/>
+      <rect class="bx" x="123" y="36" width="32" height="28" rx="1"/>
+      <text class="t" x="139" y="48" font-size="5" text-anchor="middle">A &times; B</text>
+      <text class="s" x="139" y="56" font-size="3" text-anchor="middle">integer or float</text>
+      <text class="s" x="80" y="96" font-size="3.2" text-anchor="middle">single and double precision, integer and floating point</text>
+    </svg></div>
+    <div class="cimcap">Parallel multiplier &middot; Concurrent 50&#8209;045R00, 1989</div>
+    <ul class="blist">
+      <li>Multiplies in <b>dedicated hardware</b>, not a loop of additions</li>
+      <li><b>Integers and floating point</b>, single and double precision</li>
+      <li>Rated <b>6.4 MIPS</b> on Whetstone, a floating&#8209;point benchmark</li>
     </ul>`},
 
   // NEW JERSEY
