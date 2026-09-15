@@ -1,8 +1,8 @@
 # CLAUDE.md — 3280 Kiosk
 
-Interactive exhibit kiosk built into the VCF museum's **Concurrent 3280**. Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. A portrait display on a hinge over the card cage, driven by **three physical buttons only (BACK / HOME / NEXT) — no touchscreen**. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
+Interactive exhibit kiosk built into the VCF museum's **Concurrent 3280**. Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. **Rev 3 (2026-09-03):** a portrait touchscreen on a conduit spine in front of the open card cage, both factory doors removed and stored, driven by **three on-screen commands only (BACK / HOME / NEXT) — targets, never swipe**. Rev 1–2 had three physical buttons and no touchscreen; the app still answers arrow keys and `Home` so switches can return without a content change. The software runs on a bench today (donated OptiPlex + Acer touchscreen); nothing is installed. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
 
-Start here: `docs/00-project-brief.md` — origin, content spec (from docent review), and the cross-exhibit link to the SGI Onyx.
+Start here: `docs/05-status-report.md` — where things stand, kept current. Then `docs/00-project-brief.md` — origin, content spec (from docent review), and the cross-exhibit link to the SGI Onyx.
 
 **This is a concept.** Everything in this repo is the *guiding-light concept* we're driving toward, not a shipped product. Label it that way everywhere — READMEs, docs, and the app UI carry a visible "Concept" marker, and the cabinet imagery is AI concept art. When you produce new artifacts here, keep the concept framing until the piece is actually built and installed.
 
@@ -19,17 +19,19 @@ The agents and skills under `.claude/` are **generated** from `/Users/nickd/Work
 ```
 docs/           PRD, architecture, UX specs, dev plan (team outputs land here)
 src/
-  kiosk-app/    on-screen UI (seeded from the reviewed concept app)
-  controller/   buttons → app bridge; kiosk-mode launcher (SBC software)
-electronics/    buttons, display, compute, power, wiring, BOM, schematics
-mechanical/     hinged display panel, button plate, non-destructive 3280 mounting
+  kiosk-app/    on-screen UI, single-source content in _deck.py
+  controller/   kiosk-mode launcher, rotation, systemd units (bench PC)
+  emulator/     live OS/32 on SIMH, websocket bridge, touch terminal
+electronics/    power and cabling; the Rev 3 BOM (buttons/GPIO are gone)
+mechanical/     Rev 3 conduit spine + arm, non-destructive; Rev 1-2 kept for provenance
 tests/          test suites
 ```
 
-Each discipline folder has its own README describing what belongs there. The
-software `src/kiosk-app/` is a real, working app already; `controller/`,
-`electronics/`, and `mechanical/` are placeholders the team fills in after the
-architecture doc sets the compute platform.
+Each discipline folder has its own README describing what belongs there.
+`src/kiosk-app/`, `src/controller/` and `src/emulator/` are real and deployed
+on the bench kiosk. `electronics/` is largely superseded by the donated
+hardware. `mechanical/` is a Rev 3 concept page plus superseded Rev 1–2 work;
+its README says which is which.
 
 ## Working conventions
 

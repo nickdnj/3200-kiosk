@@ -1,13 +1,23 @@
-# Bring-up — unknown mini PC, unknown panel
+# Bring-up — the mini PC and the panel, from scratch
 
-> **Concept.** Nothing here is installed in the museum yet. This is the order
-> to find things out in, on the bench, before the hardware goes near the 3280.
+> **Concept.** Nothing here is installed in the museum. This procedure **was
+> run on 2026-09-14** against Doug's donated Dell OptiPlex 9020M and Acer
+> T232HL: Steps 1–3 and 5 are done and the result survives a cold reboot.
+> Step 4 (Gate 1, the power-cut test) has **not** been run on the monitor.
+> Keep this page as the rebuild procedure and as the checklist for any second
+> machine.
 
-Doug's donation removed the two purchases that were blocking Rev 3 — a 24"
+Doug's donation removed the two purchases that were blocking Rev 3 — a
 touchscreen and a mini PC. It also replaced a *known* platform (the
 architecture doc specified a Raspberry Pi 4) with an *unknown* one. Everything
 below is about closing that gap cheaply, in an order where each answer is
 worth having before you spend money or time on the next one.
+
+**Known so far:** OptiPlex 9020M (Intel, SSD, Ubuntu 24.04 installed, GNOME
+kept as a fallback session), Acer T232HL 23" touchscreen at a native
+1920×1080, touch as a standard USB HID digitizer, rotation `right`. The
+architecture doc's compute section still names the Pi; §15 is the ADR that
+replaces it.
 
 Do these on a desk with a keyboard attached. Not on a ladder.
 
@@ -40,8 +50,8 @@ xrandr --query 2>/dev/null || DISPLAY=:0 xrandr --query
 | No VESA-capable GPU driver | Rare on any Intel/AMD mini PC. If it happens, that machine is the wrong machine. |
 | Windows licence sticker | Irrelevant to us, but **do not wipe** until Doug confirms he doesn't want it back. |
 
-Write the answers into `docs/02-architecture.md` — that document still says
-Raspberry Pi 4 and is now wrong.
+Write the answers into `docs/02-architecture.md` §15 — sections 1–14 still
+say Raspberry Pi 4 and the ADR is where the real platform is recorded.
 
 ---
 

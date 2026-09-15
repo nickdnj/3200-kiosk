@@ -1,5 +1,10 @@
 # Bill of Materials — v0 (pre-recon)
 
+> **Superseded 2026-09-15.** Written for the Raspberry Pi and three-button
+> design. Rev 3 runs on a donated Dell OptiPlex 9020M and Acer T232HL
+> touchscreen with no buttons, no GPIO and no hinge. The Rev 3 BOM is issue
+> #25; until it lands, only the power-strip and cable lines below still apply.
+
 > **Status: CONCEPT / v0.** Salvage-first per
 > [architecture §9](../docs/02-architecture.md). Quantities and sizes assume the
 > 24″ panel baseline in

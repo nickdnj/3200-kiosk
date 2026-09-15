@@ -1,123 +1,114 @@
-# Mechanical — enclosure & mounting
+# Mechanical — how the screen stands in front of the machine
 
-**Rev 1: the kiosk is a self-contained product.** An enclosure holding the
-display, the Pi, the power and the three buttons — built, wired and bench-tested
-on a table, then hung on the front of the 3280's **closed factory door** by a
-mounting adapter designed later, as a separate subsystem.
+> **Concept.** Rev 3 is a drawn concept with a load argument and five open
+> gates. No parts have been bought, nothing has been calipered, nothing has
+> been drawn to build from. Read this page before touching anything else in
+> this folder: **most of it is superseded.**
 
-The 3280 is not opened, not drilled, not modified.
+**Rev 3: doors off, touchscreen on a conduit spine.** Both factory doors lift
+off their pins and go into storage. A length of 1¼″ EMT stands on the cabinet
+floor, captured at two padded points ~40″ apart, and a monitor arm hangs a
+23″ portrait touchscreen off it with the card cage open behind. The three
+commands are on-screen targets at **38″ AFF — the ADA §308 datum that has not
+moved through three revisions.**
+
+The 3280 is not opened beyond its own doors, not drilled, not modified.
 
 ## Start here
 
-- **[`rev1-standalone-kiosk.md`](rev1-standalone-kiosk.md)** — the Rev 1 design
-  study. Monitor sizing, buttons, depth, construction, serviceability, and the
-  recommendation.
-- **[`rev1-design-study.html`](rev1-design-study.html)** — the same study as an
-  **interactive review tool**. Front elevation with a live 22/24/27/32 size
-  switcher, kiosk front view, button plate, side section, rear. Open it locally
-  (`open mechanical/rev1-design-study.html`) or use the published link in the
-  project README.
+- **[`rev3-touch-concept.html`](rev3-touch-concept.html)** — the Rev 3
+  concept page. The interface, the cabinet drawn to scale with doors on and
+  off, the site photographs, the Rev 2 → Rev 3 comparison, the load argument
+  for the spine, and the five gates. Open it locally.
+- **[`me1-findings.md`](me1-findings.md)** — the 2026-08-26 site visit. The
+  machine has **two doors, not an open card cage**. Still the governing field
+  record.
+- **[`photos/`](photos/)** — site photographs. The Rev 3 page is drawn from
+  these, not from renders.
 
-**Recommendation: 24″-class display, buttons at 38″ AFF. Kiosk 15″ W × 30″ H ×
-3-5/8″ D, ≈ 23.8 lb — a 3 mm black ACM face on a solid-pine box with a tacked
-MDF back, the face plate CNC-cut to order rather than fabricated on site.**
+## Why a spine and not the arm's own clamp
 
-The plate's window is cut **3/16″ smaller than the monitor's lit rectangle**, so
-the ACM masks the last 3/32″ of picture on every side and **no bezel is ever
-visible**: illuminated LCD in a crisp routed opening, and nothing else. A 1/4″
-black foam light seal behind the plate kills the shadow line. There is no
-shroud. That decision, and what it costs, is in
-[`fab-rev1/README.md`](fab-rev1/README.md).
+A 20 lb screen reaching 15″ out is a 300 in-lb overturning moment. A desk
+clamp has to swallow that across a two-inch jaw — about 150 lb of bite, and
+there is nothing on this machine we are willing to bite. Capture the same
+conduit at two points 40″ apart and the identical moment becomes a couple of
+about 7.5 lb at each end: a felt-faced foot and a padded top bracket. Twenty
+times gentler, and the hinge pins never see any of it.
 
-## Scope
+The spine goes on the left, the side the doors hinge from. Which side the
+power-supply modules sit on is still unconfirmed.
 
-- **The enclosure.** Face plate, structural box, removable rear panel, internal
-  frame, VESA mount, ventilation, service access.
-- **The buttons.** BACK / HOME / NEXT cut straight into the face plate,
-  centreline **38″ AFF — set by the ADA §308 reach range, and the datum the whole
-  kiosk is placed from.** 30 mm anti-vandal switches at 3.50″ centres.
-- **The mounting adapter.** *Deliberately deferred.* The enclosure carries a flat
-  rear interface zone and a known weight; that's all the adapter needs to inherit.
-  It must be **reversible, non-destructive, removable and visually discreet** —
-  this is a museum artifact, and that is a hard requirement.
+## The five gates — before anyone buys anything
+
+| Gate | Question | Status |
+|---|---|---|
+| 1 | Does the monitor come back after a power cut, or wake into standby? | **Not tested.** Go/no-go |
+| 2 | Does Linux see the touch, and does it rotate with the screen? | **Closed 2026-09-14.** See `../src/controller/` |
+| 3 | Does the arm's collar fit 1¼″ EMT? (1.510″ OD; arm poles run ~Ø38 mm) | No arm bought. Caliper the supplied pole first, err small, shim |
+| 4 | How tall is the door opening? The conduit is cut to this | The ~48″ site reading has no note of what it spanned. **Tape it** |
+| 5 | Will the museum expose the boards? | **Curatorial.** Alternative: polycarbonate in the aperture (#1) |
 
 ## Reference — what the machine actually is
-
-Only the **external** dimensions matter for Rev 1.
 
 | | | Provenance |
 |---|---|---|
 | Cabinet overall | 71″ H × 24″ W × 34″ D | OEM 50-045R00 |
 | Cabinet box, less feet | 67-7/8″ | measured, ME-1 |
 | Feet | 3-1/8″ | derived |
-| Outer door | ≈ 24.3″ W × 68.2″ H, ≈ 3″–71″ AFF | 3230 drawing + derived |
+| Front opening, clear width | 18½–19¾″ | measured |
+| Outer door | ≈ 24.3″ W × 68.2″ H, on two lift-off pins | 3230 drawing + derived + photographed |
+| Inner panel | Perforated zinc-plated steel on a piano hinge | photographed |
 | Factory paint | P.E. #464 textured | 3230 drawing |
 
-- **[`me1-findings.md`](me1-findings.md)** — the site visit. The machine has
-  **two doors, not an open card cage**. Still the governing field record.
 - **[`cabinet-spec-oem.md`](cabinet-spec-oem.md)** — Concurrent's published spec.
 - **[`cabinet-drawings-3230.md`](cabinet-drawings-3230.md)** — Perkin-Elmer's
-  mechanical drawings for the sibling 3230.
-- **[`photos/`](photos/)** — site photographs.
+  mechanical drawings for the sibling 3230. Family evidence, not gospel.
 - **[`measurement-checklist.md`](measurement-checklist.md)** — the ME-1 field
-  sheet. Mostly satisfied; **C1 no longer gates anything** under Rev 1.
-
-## Superseded for Rev 1 — kept for provenance, live again for Rev 2
-
-Everything below designs the kiosk as a **replacement door** integrated into the
-cabinet aperture. That concept is not dead — it is deferred to Rev 2 — but
-nothing in Rev 1 should be built from it.
-
-- [`monitor-selection.md`](monitor-selection.md) — the 27″ call. *Its go/no-go
-  monitor criteria still apply.*
-- [`display-approach-options.md`](display-approach-options.md) — hinged carrier panel.
-- [`door-construction.md`](door-construction.md), [`fab/`](fab/) — the
-  de-cased-panel fabrication route. **Rev 1 keeps the monitor cased.**
-- [`dimensions-assumed.md`](dimensions-assumed.md),
-  [`enclosure-buy-vs-build.md`](enclosure-buy-vs-build.md).
-- [`drawings/`](drawings/) sheets 01–06, and [`drawings/superseded/`](drawings/superseded/).
-
-## Cut files — ready to order
-
-**[`fab-rev1/`](fab-rev1/)** holds the face plate as DXF, generated and
-self-checked by [`make-cutfiles.py`](fab-rev1/make-cutfiles.py) from
-[`_p1.py`](fab-rev1/_p1.py): **P1**, one piece, **15 × 30″**, with the switch
-cutouts routed straight in.
-
-**[`cutlist/`](cutlist/)** turns the same module into a Home Depot buy plan and
-a nine-crosscut cut list; **[`build-kit/`](build-kit/)** turns it into a
-22-page wordless build cookbook. One source of truth, three outputs.
-
-⚠️ **P1 is not releasable yet.** Two numbers gate it — the ⌀30.5 mm switch
-cutout, and the monitor's measured lit rectangle. The box is gated on neither.
-
-## Can we just buy an enclosure? — no
-
-**[`ikea-build/`](ikea-build/)** — *shelved 2026-08-29,* kept for one finding
-that keeps mattering: **no off-the-shelf shallow cabinet can work.** ADA §307.2
-allows the kiosk **4.000″ of total projection**; the shallowest wall cabinets
-made are 6¾″ deep, and picture frames shallow enough to pass are thin MDF that
-will not carry 24 lb or hold a panel-mount switch. Too deep or too flimsy, with
-nothing in between.
-
-The directory also holds a costed IKEA-pine variant and a 15-page illustrated
-assembly manual. Neither is the build route — **the box is ½″ Baltic birch per
-sheets 300 / 301 / 302**.
+  sheet. Mostly satisfied; Gate 4 is what is left.
 
 ## Still to produce
 
-- `cad/` — enclosure and internal frame models (source + STEP).
-
-- `mounting.md` — the reversible adapter, after the kiosk bench-tests clean.
+- A **parts list**: conduit, arm, foot, top bracket, padding, screen mount.
+- **Drawings** of the spine, foot and top bracket, and `mounting.md` — how it
+  goes in, how it comes out, what it touches (#34).
+- A **bench mock-up** that holds the load before it goes near the cabinet (#27).
 
 ## The sequence
 
-1. **Choose the monitor** — buy or salvage, run the power-cut test, and check
-   it against the three fit limits (chin ≤ 0.92″, long-edge bezel ≤ 0.60″, body
-   ≤ 2.12″). Then measure the **lit rectangle**: that is what P1's window is cut
-   from. ← *gate, and now it gates the face plate too*
-2. Build the enclosure. Bench, no 3280 involved.
-3. Install monitor, Pi, buttons, wiring, software.
-4. Bench-test as a complete kiosk.
-5. **Then** design and build the reversible mounting adapter.
-6. Rev 2, if desired, revisits the replacement-door concept.
+1. **Gate 4.** Tape the door opening height. Nothing is cut before this.
+2. Buy the arm. **Gate 3:** caliper its collar against the conduit.
+3. Cut the spine, build the foot and top bracket, mock up on the bench with
+   the real screen. Confirm the touch row lands at 38″.
+4. **Gate 1** on the real screen with a power strip.
+5. Museum team answers **Gate 5** and accepts the touchscreen trade-off (see
+   `../docs/02-architecture.md` §15).
+6. Doors off, spine in, fit check (#35). Then the soak (#36).
+
+## Superseded — kept for provenance
+
+Rev 1 and Rev 2 designed the kiosk as a **self-contained box** (a 24″ panel
+behind a cut face plate, three 30 mm switches, a Pi inside) hung on the outer
+door's hinge pins. Both were finished, checked and buildable. Rev 3 threw
+them away on 2026-09-03: a cased touchscreen on an arm needs no enclosure, and
+a donated screen made the face-plate window moot. **Do not build from any of
+this.**
+
+- Rev 2 box: [`rev1-standalone-kiosk.md`](rev1-standalone-kiosk.md),
+  [`rev1-design-study.html`](rev1-design-study.html), [`fab-rev1/`](fab-rev1/)
+  (the P1 face plate, never released), [`cutlist/`](cutlist/),
+  [`build-kit/`](build-kit/), [`ikea-build/`](ikea-build/),
+  [`render-prompts.md`](render-prompts.md).
+- Earlier replacement-door concept:
+  [`monitor-selection.md`](monitor-selection.md) — *its go/no-go monitor
+  criteria still apply, especially power-cut recovery* —
+  [`display-approach-options.md`](display-approach-options.md),
+  [`door-construction.md`](door-construction.md), [`fab/`](fab/),
+  [`drawings/`](drawings/), [`dwg/`](dwg/).
+- Pre-measurement guesses: [`dimensions-assumed.md`](dimensions-assumed.md),
+  [`enclosure-buy-vs-build.md`](enclosure-buy-vs-build.md),
+  [`drawings/superseded/`](drawings/superseded/).
+
+One finding from the box era outlives it: ADA §307.2 allows 4″ of projection
+from a wall-mounted object, and no off-the-shelf shallow cabinet exists that
+is both shallow enough and stiff enough. Rev 3 sidesteps it — the screen is
+on a floor-standing spine, not on the wall of the machine.

@@ -1,18 +1,36 @@
 # Controller — the kiosk runtime
 
-> **Concept.** Not installed anywhere. These scripts are written against
-> hardware nobody has booted yet — read `BRINGUP.md` before running any of them.
+> **Concept.** Not installed in the museum. These scripts are **deployed and
+> running on the bench kiosk** — Doug's donated Dell OptiPlex 9020M driving
+> an Acer T232HL touchscreen, Ubuntu 24.04 — since 2026-09-14, and proven to
+> come back on their own after a cold reboot. `BRINGUP.md` is the from-scratch
+> procedure if that machine ever has to be rebuilt.
 
 What makes the exhibit come up by itself and stay up. As of Rev 3 there are no
 buttons, no GPIO and no daemon: this is display rotation, touch remapping, a
 locked-down browser, and a supervision chain.
 
 ```
-BRINGUP.md           START HERE. What to find out about the mini PC, in order.
+BRINGUP.md           The from-scratch bring-up of a fresh machine, in order.
 install.sh           one-shot install onto a fresh Debian/Ubuntu machine
 kiosk.sh             launches Chromium with the kiosk flag set
 rotate.sh            rotates the panel AND the digitizer (they are separate)
+os32.service         the OS/32 emulator (see ../emulator/)
+os32-bridge.service  websocket <-> telnet bridge for the terminal screen
+os32-reset.service   nightly clean restart of OS/32
 ```
+
+## What is still open on the bench machine
+
+- **Read-only root.** The disk is writable and the exhibit will be power-cut
+  nightly. The emulator also writes to its disk image. #13.
+- **Golden image and re-image procedure.** The OptiPlex is the only copy of
+  itself. #17.
+- **Network posture.** Wi-Fi is on for updates; production is offline and
+  inbound-locked, and the emulator bridge should bind to loopback only. #16.
+- **Full-hang watchdog.** The loop restarts Chromium; nothing reboots a frozen
+  machine. #15.
+- **Gate 1.** The monitor has not yet been power-cut tested. #23.
 
 ## The supervision chain
 

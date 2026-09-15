@@ -1,28 +1,49 @@
 # Kiosk App — the on-screen UI
 
 > **Concept, not shipped.** Nothing here is installed in the museum. The
-> cabinet imagery on the concept page is AI concept art; the copy is Rick
-> Lewis's reviewed draft. Keep the "Concept" marker until the piece is built.
+> panel build runs on the bench kiosk (a donated OptiPlex + Acer touchscreen)
+> and nowhere else. The cabinet imagery on the concept page is AI concept art.
+> Keep the "Concept" marker until the piece is built and installed.
 
-Nine screens telling the Concurrent 3280's story, driven by **three commands —
-BACK / HOME / NEXT**. As of Rev 3 those are on-screen touch targets rather than
-physical switches, but the deck itself never knew the difference and still
-doesn't: arrow keys and `Home` drive it identically.
+Sixteen screens telling the Concurrent 3280's story, plus a seventeenth that
+hands the visitor a live OS/32 terminal (see `../emulator/`). Driven by
+**three commands — BACK / HOME / NEXT**. As of Rev 3 those are on-screen touch
+targets rather than physical switches, but the deck itself never knew the
+difference and still doesn't: arrow keys and `Home` drive it identically.
 
 ## Layout
 
 ```
-_deck.py          THE CONTENT. Nine screens + the screen CSS + the image and
+_deck.py          THE CONTENT. All screens + the screen CSS + the image and
                   font inlining. Edit here; both builders read it.
 build-app.py   -> index.html        the concept-review page (cabinet + screen)
 build-kiosk.py -> dist/kiosk/       the deployable panel build
 check-fit.py      renders the panel build for real and measures overflow
 fetch-fonts.py    re-pulls the woff2 files (rarely needed)
-assets/           source images and the cached latin-subset fonts
+assets/           source images, video, and the cached latin-subset fonts
 ```
 
-**`_deck.py` is the single source of truth.** Two targets, one copy of Rick's
-words, so they cannot drift apart. Never hand-edit a generated `index.html`.
+**`_deck.py` is the single source of truth.** Two targets, one copy of the
+reviewed words, so they cannot drift apart. Never hand-edit a generated
+`index.html`.
+
+## The deck
+
+| # | Section | Screen |
+|---|---|---|
+| 1 | Home | The Concurrent 3280 was made in New Jersey |
+| 2 | What it did | One machine, many jobs |
+| 3–5 | · weather · space · finance | NEXRAD radar, Shuttle training, trading floors. Real footage, public domain or sourced |
+| 6 | Under the hood | Big iron, built by hand |
+| 7–8 | Where it was born | Monmouth County; the sixty-year lab lineage |
+| 9–11 | Who built it | The small team; the Cruncher 2 roster; the 1985–86 bring-up |
+| 12 | A quiet first | The line that set Unix free |
+| 13 | Just down the room | Cross-link to the SGI Onyx |
+| 14–16 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
+| 17 | Try it yourself | The OS/32 terminal |
+
+The team and bring-up screens draw on Ken Yeager's letters and were cleared
+for public by Ruth Yeager (2026-09-15).
 
 ## Build
 
@@ -32,10 +53,17 @@ python3 build-kiosk.py    # the real thing -> dist/kiosk/index.html
 python3 check-fit.py      # then ALWAYS this, if you touched any copy
 ```
 
-`build-kiosk.py --panel 27` re-derives the geometry for a different panel;
-`--nav`, `--idle` and `--fit` are the other knobs. It prints its own checks —
-touch-target size, dead space, type legibility at distance — and exits
-non-zero if one fails.
+`build-kiosk.py --panel <diagonal>` re-derives the geometry for a different
+panel. **The default is 23.8″; the bench kiosk's Acer T232HL is a 23″ panel.**
+Pass `--panel 23` and re-read the legibility lines until the default is
+changed. `--nav`, `--idle` and `--fit` are the other knobs. It prints its own
+checks — touch-target size, dead space, type legibility at distance — and
+exits non-zero if one fails.
+
+Deploying to the bench kiosk is by hand today: copy `dist/kiosk/index.html`
+to `/opt/3280-kiosk/index.html` on the OptiPlex (that is what
+`../controller/install.sh` does on a fresh machine). A deploy script is
+tracked as issue #4.
 
 ## Why `check-fit.py` exists
 
@@ -43,7 +71,9 @@ The build's arithmetic sizes the type to fit. Arithmetic cannot predict
 **reflow** — a headline that wraps to three lines instead of two blows the
 budget, and you only find out on the exhibit floor. So `check-fit.py` renders
 the real build in headless Chrome at a true 1080×1920 and measures every
-screen's content against its box. Today the tightest screen has ~6% slack.
+screen's content against its box. Today the tightest content screen (weather)
+has 6.9% slack; the emulator screen reports 0% because it fills its box by
+design.
 
 Run it after any copy change. It is 25 seconds.
 
@@ -54,8 +84,8 @@ Run it after any copy change. It is 25 seconds.
   survives into the output. Left pointing at Google Fonts, the page looks
   perfect on a laptop and silently reflows to fallback faces in the museum.
 - **Declare the charset.** Over `file://` with no `<meta charset>`, Chrome
-  falls back to windows-1252 and every `·` becomes `Â·`. Both builders now
-  emit the meta tag, and the deck's copy uses HTML entities as well.
+  falls back to windows-1252 and every `·` becomes `Â·`. Both builders emit
+  the meta tag, and the deck's copy uses HTML entities as well.
 
 ## The screen, and what Rev 3 cost it
 
@@ -72,10 +102,18 @@ length — where you must stand to touch anything — they are at 33. The headli
 still carries the room. Cutting one bullet per screen would buy ~29% more
 type, and that is the museum team's call.
 
+## Built-in behaviours worth knowing
+
+- **Idle reset.** 75 s of no input returns to Home. Suppressed while a video
+  slide is playing.
+- **Diagnostics panel.** Hold the top-left corner for 3 s: screen size, device
+  pixel ratio, orientation, `maxTouchPoints`, last touch coordinates. This is
+  how you prove the touch matrix is right after rotating.
+
 ## Still open
 
-- Decouple content from `_deck.py` into a data file non-devs can edit.
-- Anonymous screen-view counts (a museum-team ask) — needs a privacy decision first.
+- Decouple content from `_deck.py` into a data file non-devs can edit (#2).
+- Anonymous screen-view counts, a museum-team ask. Needs a privacy decision first (#18, #19).
 - An attract loop with motion, if the still HOME screen doesn't pull people in.
 
 ## Which 3280? (read before adding specs)

@@ -1,32 +1,40 @@
-# Electronics — the kiosk's electrical hardware
+# Electronics — what carries a volt in the kiosk
 
-Everything that carries a signal or a volt in the kiosk: the three buttons, the
-display, the single-board computer, power, and the wiring that joins them.
+> **Concept.** Nothing here is installed in the museum.
 
-## Scope
+**Rev 3 deleted most of this subsystem.** The donated hardware — a Dell
+OptiPlex 9020M and an Acer T232HL touchscreen — replaced the Raspberry Pi,
+the three buttons, the GPIO harness, the de-cased panel and the 5 V line
+across a hinge that no longer exists. The kiosk is now two off-the-shelf
+appliances, an HDMI cable, a USB cable for touch, and mains power. See the ADR
+in [`../docs/02-architecture.md`](../docs/02-architecture.md) §15.
 
-- **Buttons.** Three arcade/industrial momentary pushbuttons (BACK / HOME /
-  NEXT), their harness, and pull-up/debounce approach.
-- **Display.** Portrait panel — model, interface (HDMI/DSI), power, backlight,
-  brightness for museum lighting.
-- **Compute.** SBC selection, storage, and how it drives display + reads buttons
-  (see `../src/controller/`).
-- **Power.** Single-cord entry, distribution, on/off, surge, and safe shutdown.
+## What is left in scope
+
+- **Power.** One mains entry, a power strip, and the two behaviours that
+  decide whether the exhibit is dark in the morning: the OptiPlex BIOS must
+  be set to *Restore on AC Power Loss → Power On*, and the monitor must wake
+  to picture rather than standby after a cut (**Gate 1, untested**). AC
+  scheduling for museum hours is #23.
+- **Cabling.** HDMI and USB from the OptiPlex to the screen, routed along
+  the spine. Where the OptiPlex physically sits (cabinet floor, behind the
+  spine) is a mechanical question, but the cable run is ours.
+- **The BOM.** Rev 3 is short: OptiPlex, screen, arm, conduit and brackets,
+  power strip, cables. #25 owns it.
 
 ## What's here now
 
-- **[`salvage-recon.md`](salvage-recon.md)** — the warehouse shopping list:
-  what to look for, acceptance criteria (especially for monitors), the powered
-  test to run before de-casing anything, and what to write down.
-- **[`bom.md`](bom.md)** — v0 bill of materials, salvage-first, marked
-  Have / Salvage / Buy.
+- **[`bom.md`](bom.md)** — the v0 salvage-first BOM for the Pi-and-buttons
+  design. **Superseded.** Kept until the Rev 3 BOM replaces it.
+- **[`salvage-recon.md`](salvage-recon.md)** — the warehouse shopping list
+  written before the donation. The monitor acceptance criteria and the
+  powered power-cut test are still the right test for Gate 1; the rest is
+  historical.
 
 ## Deliverables still to produce
 
-- `bom.csv` — machine-readable BOM with part numbers once parts are chosen.
-- `wiring/` — pinout tables and wiring diagrams (button → GPIO, display, power).
-- `schematics/` — schematic + any adapter boards (KiCad preferred; export PDFs).
-- `assembly.md` — how it goes together and how it's tested.
+- `bom.md` rewritten for Rev 3 with real part numbers.
+- A one-page cable and power note: what plugs into what, and the BIOS setting.
 
-Empty for now — populated during the hardware design phase. Keep proprietary or
-purchased datasheets out of git; link to them from `bom.md` instead.
+`wiring/` and `schematics/` were planned for the button harness and are no
+longer needed.

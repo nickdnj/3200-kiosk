@@ -1,8 +1,12 @@
 # 3280 Kiosk — Development Plan
 
-> **Status: CONCEPT / v1 plan.** The work breakdown we're driving toward, across
-> software, electronics, and mechanical. Story list is the basis for GitHub
-> issues; sequencing follows the PRD phasing (`01-prd.md` §14).
+> **Historical — the Rev 1 plan (2026-08-22).** This is the work breakdown
+> the 39 GitHub issues were cut from. Rev 3 (2026-09-03) removed the buttons,
+> the GPIO controller, the Pi image, the hinge and the enclosure; the issues
+> were closed or re-scoped accordingly on 2026-09-15. **The issue tracker is
+> authoritative now, not this document.** What still holds: the milestone
+> names, the integration track, and the software hardening stories (read-only
+> root, watchdog, golden image, usage logging). See `05-status-report.md` §7.
 
 **Reads with:** `01-prd.md`, `02-architecture.md`, `03-ux.md`. Each story cites the
 PRD/architecture IDs it satisfies.

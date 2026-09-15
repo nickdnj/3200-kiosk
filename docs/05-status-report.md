@@ -1,292 +1,281 @@
 # 3280 Kiosk — Project Status Report
 
-**As of 2026-08-28** · repo [nickdnj/3280-kiosk](https://github.com/nickdnj/3280-kiosk)
-· written as a **handoff for a team joining in parallel**
+**As of 2026-09-15** · repo [nickdnj/3280-kiosk](https://github.com/nickdnj/3280-kiosk)
+· written as a **handoff for anyone joining now**
 
+> **Concept.** Nothing here is installed in the museum. There is a working
+> kiosk on a bench. The gap between those two sentences is this document.
 
-> ## ▲ Rev 1 pivot — 2026-08-28
-> **The mechanical design changed after this report was written.** The kiosk is
-> no longer a replacement door integrated into the cabinet; it is a
-> **self-contained enclosure surface-mounted on the closed factory door**, built
-> and bench-tested standalone, with the reversible mount deferred to its own
-> subsystem. Read
-> [`../mechanical/rev1-standalone-kiosk.md`](../mechanical/rev1-standalone-kiosk.md)
-> **before** acting on anything mechanical below.
->
-> What this changes: **C1 no longer gates anything.** The 27″ recommendation
-> becomes **24″**. The aperture, inner panel and hinge reuse are all out of scope.
-> Everything below about the software track, the measured external dimensions,
-> the provenance levels and the traps is unaffected.
+The previous edition of this report (2026-08-28) described a Rev 1 design:
+a wooden box, a Raspberry Pi and three physical buttons hung on the 3280's
+door. **That design no longer exists.** It is preserved in git history (the version of this file before
+2026-09-15) and nothing in it should be acted on except the cabinet
+measurements, which are repeated below.
 
 ---
 
 ## 0. Read this first
 
-An interactive exhibit kiosk built into the Vintage Computer Federation's
-**Concurrent 3280** minicomputer. A portrait screen where the machine's door is,
-driven by **three physical buttons — BACK / HOME / NEXT. No touchscreen.**
+An interactive exhibit kiosk for the Vintage Computer Federation museum's
+**Concurrent 3280** minicomputer. A portrait touchscreen floats in front of
+the open card cage on a conduit spine. Three on-screen commands — **BACK /
+HOME / NEXT** — step through a deck of screens telling the machine's story,
+and a final screen lets a visitor type at a live **OS/32** system.
 
-**Phase:** planning complete, execution barely started. 39 GitHub issues, **0
-closed**. One site visit done.
+**Phase:** Rev 3. Software is built and running on the real hardware, on a
+bench. Mechanical is a concept page and nothing else. Nothing has been
+installed, soaked, or signed off.
 
-**The single most important thing to know:** the machine is **not** what the
-concept art shows. Roughly half the mechanical documentation in this repo was
-written before we measured it and is **superseded**. §6 tells you exactly which
-files to ignore. Read that before you read anything else in `mechanical/`.
+**The three things to know:**
 
-**Everything mechanical is blocked on one unmeasured dimension** (§5). Everything
-in the **software track is unblocked, untouched, and safe to work in parallel**
-(§8).
+1. **The hardware is donated and already running.** Doug Crawford gave a
+   Dell OptiPlex 9020M and an Acer T232HL 23″ touchscreen. On 2026-09-14
+   they became a working kiosk over SSH: Ubuntu 24.04, X11, Chromium in
+   kiosk mode, portrait rotation with the touch digitizer remapped, proven
+   across a cold reboot. The Raspberry Pi, the GPIO buttons, and the whole
+   electronics subsystem were deleted by that donation.
+2. **The mechanical design is Rev 3: doors off, conduit spine, monitor arm.**
+   Both factory doors lift off their pins and go into storage. A length of
+   1¼″ EMT stands on the cabinet floor and a monitor arm hangs the screen
+   off it. Nothing is cut, drilled, or fastened to the machine. This exists
+   as `mechanical/rev3-touch-concept.html` and as five unanswered gates. No
+   parts have been bought, measured, or drawn.
+3. **The issue tracker was reconciled with Rev 3 on 2026-09-15.** Before that
+   date all 39 issues described the deleted design. §7 lists what was closed
+   and what was re-scoped.
 
 ---
 
 ## 1. The product
 
-A docent or visitor steps through a short deck of screens telling the machine's
-story. Swing the display open and the real hardware is behind it.
-
 | | |
 |---|---|
-| Interaction | 3 buttons only. No touch, no keyboard, no network dependence |
-| Display | Portrait, ~27″ |
-| Compute | Raspberry Pi 4, Chromium kiosk, offline in production |
-| Content bar | ~30% of web copy, 3–5 bullets/screen, big sans-serif, readable at 3–6 ft, verified facts only |
-| Hard constraint | The 3280 is a **museum artifact** — all mounting reversible, non-destructive |
-| Success | Ownership transfers to the museum. "Nick-in-the-loop forever" = failure |
+| Interaction | Three on-screen touch targets: BACK / HOME / NEXT. Arrow keys and `Home` drive it identically. No swipe, no gestures |
+| Display | Acer T232HL, 23″ IPS touch, 1080 × 1920 portrait |
+| Compute | Dell OptiPlex 9020M, Ubuntu 24.04, X11, Chromium kiosk, `file://`, offline in production |
+| Content | 16 screens in `src/kiosk-app/_deck.py`, plus a live OS/32 terminal |
+| Content bar | Docent-set: ~30% of web copy, 3–5 bullets/screen, big sans-serif, readable at 3–6 ft, verified facts only |
+| Touch row | 38″ above finished floor, set by ADA §308. Unchanged from Rev 1 |
+| Hard constraint | The 3280 is a **museum artifact**. Reversible and non-destructive, always |
+| Success | Ownership transfers to the museum. "Nick-in-the-loop forever" is failure |
 
-Docent review (Rick Lewis) set the content bar and approved the concept:
-*"YES YES YES. This is just the job."* That approval was against art that has
-since turned out to misrepresent the machine — see §7.
+Exhibit review authority is the museum team (Doug Crawford), not any one
+docent. The original content review that set the bar above was against Rev 1
+concept art; the copy survived the pivot verbatim, the art did not.
 
 ---
 
-## 2. What we know about the machine
+## 2. What is done
 
-**Provenance matters here.** Four different confidence levels:
+### Software — on the bench, working
 
-### Measured — tape on the machine, 2026-08-26
-
-| Dimension | Value | Confidence |
+| Piece | State | Where |
 |---|---|---|
-| Cabinet **box** height (excl. feet) | **67-7/8″** | Good |
-| Front opening, clear width | **~19.75″** (19.5–20) | Good |
-| Outer door width | ~23–24″ | Poor — couldn't see both tape ends |
-| Two vertical runs | ~48″ and ~32″ | Readings clear, **what they span is unknown** |
+| Deck content | 16 screens, all pass the fit check, tightest content screen 6.9% slack | `src/kiosk-app/_deck.py` |
+| Panel build | Self-contained 1080 × 1920 page, fonts and images inlined, asserts no network reference survives | `build-kiosk.py` → `dist/kiosk/index.html` |
+| Fit check | Renders the real build in headless Chrome and measures every screen against its box | `check-fit.py` |
+| Concept review page | Same content in the cabinet mock-up, for review | `build-app.py` → `index.html` |
+| Kiosk runtime | agetty autologin → startx → loop → `kiosk.sh`. Chromium dies, back in 3 s. X dies, back via agetty. Cold-reboot proven | `src/controller/` |
+| Portrait + touch | `rotate.sh` rotates the picture and applies the digitizer matrix. Diagnostics panel: hold the top-left corner 3 s | `src/controller/rotate.sh` |
+| OS/32 emulator | Real OS/32 on a SIMH Interdata-32, websocket bridge, touch terminal with on-screen keyboard, one-tap Fortran / Pascal / C demos, nightly clean reset | `src/emulator/` + three systemd units |
+| Idle reset | 75 s to Home, suppressed while a video slide plays | built in |
+| Team page clearance | Cleared for public by Ruth Yeager, 2026-09-15 | commit `ec6b33f` |
 
-### OEM — Concurrent *3280/Micro3200 Product Overview*, 50-045R00, Aug 1989, pp.73–74
+### The deck, as of today
 
-| | |
-|---|---|
-| Cabinet | **71″ H × 24″ W × 34″ D**, ≈5.7 ft² |
-| Internal stack | power → fan → CPU + 18 S-bus slots → intermediate duct → I/O chassis → fan |
-
-Height reconciles exactly: **67-7/8″ box + 3-1/8″ feet = 71″**. A 1989 catalogue
-and a warehouse tape agreeing to an eighth is strong mutual confirmation.
-
-### Sibling model — Perkin-Elmer 3230 *Installation & Maintenance*, 47-004 R21, 1982, ch.3
-
-The 3230 is a 56″ rack, not our 71″ cabinet — **family evidence, not gospel.**
-
-| | |
-|---|---|
-| **19″ EIA rack** | Panel space 1292 mm (50.87″) × **482.6 mm (19.00″)**; 28″ upright-to-upright |
-| Door | Part **13.045 F01**, 54.32″ × 24.3″, two spring latches at top, foam gasket, vertical louvers |
-| **Paint** | **P.E. #464 TEXTURED** — factory spec. Texture matters as much as hue |
-| Materials | CRS .104″ structure, .047″ skins |
-| Cooling | Bottom blower 450 CFM, right-side plenum, five removable covers (solid / perforated) |
-
-### Derived — from a uniform frame offset (working assumption, 2026-08-27)
-
-```
-frame offset = (24.00 − 19.75)/2 = 2.125"  uniform on all four sides
-aperture     = 19.75" × 63.625"    (5.25" – 68.88" AFF)
-door         = 24.30" × 68.175"    (2.98" AFF), 0.15" overhang all round
-```
-
-Self-consistent: door height 68.175″ = box 67.875″ + 2 × 0.15″, *the same
-overhang the door has in width*. Two independently sourced numbers agreeing.
-
-### Not known
-
-- **C1 — the closing clearance.** See §5. This is the blocker.
-- What the 48″ and 32″ readings measure
-- Hinge type and spacing; latch mechanism
-- Whether rack rails are present with a free run
-- Floor → aperture bottom, confirmed rather than derived
-
----
-
-## 3. The finding that changed the project
-
-**The 3280 has two doors. There is no open card cage.**
-
-- **Outer:** tan **louvered** door, hinged, dark trim strip, "SYSTEM #1" label
-- **Inner:** **perforated zinc-plated steel** panel on a piano hinge
-- **Behind:** the card cage, with Concurrent power-supply modules down one side
-
-Every drawing produced before the site visit shows an **open front opening with a
-visible card cage** and a fixed frame spanning it. **That geometry does not
-exist** — the AI concept render invented it.
-
-Consequences:
-
-- **Mounting is solved.** Remove the outer door, store it, hang the kiosk panel
-  on its hinges. More reversible than clamping rails or gripping a frame lip,
-  because a cover door is *built* to come off. ME-2 and ME-3 (reversible mount,
-  fixed frame) largely collapse.
-- **Exposed-board risk is moot.** The boards already sit behind perforated steel.
-  ME-10 / the deferred plexiglass is unnecessary.
-- **MR3 breaks.** "Viewing area around the display" meant seeing the machine
-  around the screen. There's a steel panel there. Partially recovered by a
-  **viewing cutout in the lower third** of the door — it's 68″ tall, so there's
-  room. **This is a docent decision, not an engineering one.**
-
----
-
-## 4. The design as it stands
-
-```
-Remove the outer louvered door  →  store it
-Carrier panel (24.30" × 68.175") hangs on the original hinges
-  ├── 27" IPS 1440p matte monitor, cased, portrait, VESA 100×100
-  ├── button plate below — 3 buttons + 2 spare blanks, centre 34" AFF
-  ├── viewing cutout, lower third
-  └── Raspberry Pi 4 behind the monitor
-```
-
-Screen centre ≈ **49″ AFF**. Buttons at 34″ AFF sit mid-band in the 15″–48″ ADA
-reach range.
-
-### Decisions, including the ones we reversed
-
-| Decision | Reversed from | Why |
+| # | Section | Screen |
 |---|---|---|
-| **Cased monitor, kept whole** | De-cased bare LCD panel | De-casing is one-way and risks a good panel. A cased monitor is **docent-replaceable**, and its own housing solves the enclosure and thermal requirements |
-| **27″** | 24″ | The door is 24.3″ wide, not the 14.5″ we'd assumed. A 24″ portrait panel is 12.5″ — 51% of the door |
-| **Replace the existing door** | Fabricate a fixed frame | The machine already has a hinged, removable door of the right size |
-| **1 panel or none to fabricate** | 4-part laser-cut aluminium package | Cascade of the above |
+| 1 | Home | The Concurrent 3280 was made in New Jersey |
+| 2 | What it did | One machine, many jobs |
+| 3 | · weather | Behind the nation's storm radar (NOAA NEXRAD footage, public domain) |
+| 4 | · space | It trained the Shuttle crews |
+| 5 | · finance | Built to never drop a trade |
+| 6 | Under the hood | Big iron, built by hand |
+| 7 | Where it was born | Made in Monmouth County |
+| 8 | · lineage | Sixty years, one New Jersey lab |
+| 9 | Who built it | Built by a small team |
+| 10 | The team | Sixteen engineers, one lab (the Cruncher 2 roster) |
+| 11 | Bring-up | Cruncher lives (1985–86, with the CRUNCHER LIVES illustration) |
+| 12 | A quiet first | The line that set Unix free |
+| 13 | Just down the room | Two machines, one designer (cross-link to the SGI Onyx) |
+| 14–16 | Open it up | Three full-bleed photographs of the card cage, processor, memory and control |
+| 17 | Try it yourself | The OS/32 terminal |
 
-**27″ specifically:** IPS is near-mandatory (visitors approach off-axis, and 32″
-is often VA); 1440p is 109 PPI and a Pi 4 rotates it comfortably where 4K is
-sluggish; ~12 lb on original hinges vs ~17 lb for 32″.
+Two slides were removed on purpose: the multiprocessor slide (the museum's
+unit is a 3280, not the 3280E MPS) and the Defense slide (at Nick's request).
 
-### Two easily-missed selection criteria
+### Mechanical — measured, then redesigned twice
 
-1. **The monitor must power itself back on after a mains cut.** The exhibit runs
-   on an AC timer. Many monitors wake into standby — that's a black screen every
-   morning. **Go/no-go.**
-2. **Matte only.** Museum lighting mirrors off glossy panels.
+The cabinet numbers from the 2026-08-26 site visit are still the governing
+field record and still correct:
+
+| Dimension | Value | Provenance |
+|---|---|---|
+| Cabinet overall | 71″ H × 24″ W × 34″ D | OEM 50-045R00, confirmed by tape |
+| Cabinet box, less feet | 67-7/8″ | measured |
+| Feet | 3-1/8″ | derived, reconciles exactly |
+| Front opening, clear width | 18½–19¾″ | measured |
+| Outer door | ≈ 24.3″ W × 68.2″ H | 3230 drawing + derived |
+| Behind the doors | Louvered outer door on two pins, perforated zinc inner panel on a piano hinge, card cage and Concurrent PSU modules behind | photographed |
+
+Rev 1 (box on the door hinges) and Rev 2 (pine box, ACM face plate, cut list,
+build kit) were both finished and buildable. Rev 3 threw them away on
+2026-09-03 because a cased touchscreen on an arm needs no enclosure at all,
+and because a donated screen made the face-plate window moot. Everything under
+`mechanical/` except `rev3-touch-concept.html`, `me1-findings.md`, the OEM and
+3230 references and `photos/` is now provenance, not plan.
 
 ---
 
-## 5. The blocker
+## 3. What is not done
 
-**C1 = distance from the outer door plane to the inner perforated panel.**
+### Mechanical Rev 3 — the critical path
 
-Required: **≥ 2.48″** (carrier panel 0.125 + monitor body 1.85 + 0.5 clearance).
+Rev 3 is a drawn concept with a load argument (a 20 lb screen 15″ out is a
+300 in-lb moment; captured at two points 40″ apart on the spine that is ~7.5 lb
+at each padded contact, versus ~150 lb in a desk-clamp jaw). It has no parts.
 
-Not measured. No catalogue carries it. It decides **recessed vs. proud**
-mounting — and the proud variant needs almost none, so a bad C1 doesn't kill the
-project, it just changes how it looks.
+Five gates, one closed:
 
-Measure it at top, middle and bottom of the aperture and design to the smallest.
+| Gate | Question | Status |
+|---|---|---|
+| 1 | Does the monitor come back after a power cut, or wake into standby? | **Not tested.** Go/no-go for the exhibit |
+| 2 | Does Linux see the touch, and does it rotate with the screen? | **Closed.** Both proven 2026-09-14 |
+| 3 | Does the arm's collar fit 1¼″ EMT (1.510″ OD, poles run ~Ø38 mm)? | No arm bought, nothing calipered |
+| 4 | How tall is the door opening? The conduit is cut to this | The ~48″ tape reading from the site visit has no note of what it spanned. **Needs a tape** |
+| 5 | Will the museum expose the boards? | **Curatorial.** The alternative is polycarbonate in the aperture |
 
-**Also worth one tape each:** the door height (confirms §2's derivation), the
-foot height (currently derived), and whether rack rails have a free run.
+Then: parts list, spine and bracket drawings, `mounting.md`, a bench mock-up
+that holds the load, and a fit check in the cabinet.
+
+### Software — hardening, not features
+
+- **Read-only root.** The OptiPlex has a writable disk and the exhibit will be
+  power-cut nightly. The emulator writes to `os32.dsk`. Nothing has been done
+  about either.
+- **Golden image and re-image procedure** for the OptiPlex. Today the machine
+  is the only copy of itself.
+- **Network posture.** The websocket bridge listens on a port. In production
+  the machine should be inbound-locked, SSH only.
+- **Panel diagonal.** `build-kiosk.py` defaults to a 23.8″ panel. The T232HL
+  is a 23″ panel. Re-run with `--panel 23` and re-read the legibility checks.
+- **Watchdog for a full hang.** The loop restarts Chromium; nothing reboots a
+  frozen machine.
+- **Content data file.** Copy lives in Python. A non-developer cannot edit it.
+- **Usage counts.** A museum-team ask. Needs a privacy decision first.
+- **Attract loop.** If the still Home screen does not pull people in.
+- **Reliability soak.** A week on the bench, unattended, before it goes near
+  the cabinet. Not started.
+
+### Decisions the museum team owns
+
+- **Expose the card cage** (Gate 5). What makes the exhibit worth looking at is
+  also what removes forty years of finger protection.
+- **Accept the touchscreen accessibility trade-off.** Three physical buttons
+  at 38″ were tactile, findable without sight, and ADA-compliant by
+  construction. A touchscreen is none of those. Large targets mitigate. The
+  team should accept this deliberately, not discover it. See the ADR in
+  `02-architecture.md` §15.
+- **Body type at 6 ft.** Bullets subtend 13.6 arcmin at 6 ft against a 16
+  arcmin comfort line. Fine at arm's length, where you stand to touch. Cutting
+  one bullet per screen buys ~29% more type. Content call, not engineering.
 
 ---
 
-## 6. ⚠️ Repo map — current vs. superseded
+## 4. The two machines
 
-**Roughly half of `mechanical/` is obsolete but still present.** Do not build
-from the right-hand column.
+| | Bench kiosk (exists) | Museum kiosk (target) |
+|---|---|---|
+| Where | On a bench, reachable over SSH | In front of the 3280 |
+| Network | Wi-Fi on, for updates | Offline, inbound-locked |
+| Disk | Writable Ubuntu install | Read-only overlay, `/data` for logs |
+| Power | Plugged in | AC timer, BIOS restore-on-power |
+| Mount | Desk stand | Conduit spine + arm, doors stored |
+| Emulator | Running | Running, bridge on loopback only |
 
-### Current
+The whole of §3 is the right-hand column.
 
-| File | What it is |
+---
+
+## 5. Repo map — what is current
+
+| Path | State |
 |---|---|
-| `mechanical/me1-findings.md` | **The site visit. Read first.** |
-| `mechanical/monitor-selection.md` | Why 27″, with the fit maths |
-| `mechanical/cabinet-spec-oem.md` | Concurrent's published cabinet spec |
-| `mechanical/cabinet-drawings-3230.md` | Perkin-Elmer mechanical drawings, sibling model |
-| `mechanical/drawings/01…07` | Full drawing set, measured geometry |
-| `mechanical/drawings/make-drawings.py` | **Generates 01–06 from one geometry block.** Edit params, re-run |
-| `mechanical/measurement-checklist.md` | Field sheet; C1 and door height are what's left |
-| `mechanical/photos/` | Site photographs |
-| `docs/00`–`04` | Brief, PRD, architecture, UX, dev plan — **still broadly valid** |
-| `src/kiosk-app/` | Working concept app + builder. **Untouched, valid** |
-
-### Superseded — ignore
-
-| File | Why |
-|---|---|
-| `mechanical/dimensions-assumed.md` | Pre-measurement guesses. Wrong cabinet, wrong door |
-| `mechanical/door-construction.md` | De-cased-panel build spec. Obsolete route |
-| `mechanical/fab/` (DXFs, generator, DRAWING-PACKAGE.md) | 4-part laser-cut package for a door we're no longer building |
-| `mechanical/enclosure-buy-vs-build.md` | Moot — the cabinet supplies the enclosure |
-| `mechanical/display-approach-options.md` | Decision made (Option C). Historical |
-| `mechanical/drawings/superseded/` | Pre-measurement drawings |
-
-**Also stale:** the 39 GitHub issues were written against the pre-measurement
-plan. **ME-2, ME-3, ME-10 are likely moot; ME-4 changed completely.** Nobody has
-reconciled the issue list with §3–§4 yet — *that is itself available work.*
+| `docs/00-project-brief.md` | Origin and content spec. Still the reason the project exists |
+| `docs/01-prd.md`, `03-ux.md` | Written for Rev 1. Requirements and screen flow still hold; button and enclosure sections do not |
+| `docs/02-architecture.md` | §1–14 describe the software runtime accurately. **§15 is the Rev 3 ADR — read it** |
+| `docs/04-dev-plan.md` | The Rev 1 work breakdown the issues were cut from. Historical; the issue tracker is now authoritative |
+| `src/kiosk-app/` | **Current.** `_deck.py` is the single source of truth |
+| `src/controller/` | **Current.** Deployed on the OptiPlex |
+| `src/emulator/` | **Current.** Deployed on the OptiPlex |
+| `electronics/` | Written for the Pi and buttons. Superseded; its README says what survives |
+| `mechanical/rev3-touch-concept.html` | **Current.** The Rev 3 concept page |
+| `mechanical/me1-findings.md`, `photos/`, OEM and 3230 references | **Current.** Field record |
+| Everything else under `mechanical/` | Rev 1 and Rev 2. Provenance only |
 
 ---
 
-## 7. Traps
+## 6. Traps
 
-Things that already cost us time:
+Things that already cost us time. Still true.
 
-1. **The AI concept renders are wrong about the machine.** They show an open card
-   cage that doesn't exist, and dimensions off by 1–1.5″. They're flagged as
-   concept art throughout, but they drove real design decisions for days.
-2. **We designed a 14.5″ door for a 19″ opening** when the actual usable face is
-   a 24.3″ door. Everything downstream — monitor size, panel layout, fab package
-   — inherited that error.
-3. **A measurement can be right and still mislead.** The 67-7/8″ height looked
-   like it contradicted the OEM's 71″. It didn't — one was the box, one included
-   the feet. Always ask *what* was measured, not just the number.
-4. **Sibling-model documentation is not the machine.** The 3230 data is good
-   evidence and clearly labelled as such, but it's a 56″ rack, not our 71″ cabinet.
+1. **The early AI concept renders were wrong about the machine.** They showed
+   an open card cage that does not exist and drove real design decisions for
+   days. Rev 3 shows the site photographs and says so.
+2. **A measurement can be right and still mislead.** 67-7/8″ looked like it
+   contradicted the OEM's 71″. One was the box, one included the feet. Always
+   ask what was measured, not just the number. The ~48″ reading is the live
+   example: nobody wrote down what it spanned, and Gate 4 waits on it.
+3. **Rotating the picture does not rotate the touch.** Two devices, two
+   settings. `rotate.sh` does both; do not do one by hand.
+4. **A page that is perfect on a laptop reflows in the museum.** The kiosk has
+   no network. `build-kiosk.py` refuses to emit an external reference, and
+   `check-fit.py` measures real reflow. Run it after any copy change.
+5. **Snap Chromium cannot read `/opt`.** On Ubuntu, the app comes up blank
+   until you install the .deb. `install.sh` says so.
+
+---
+
+## 7. Issue tracker reconciliation — 2026-09-15
+
+The 39 issues were cut from the Rev 1 dev plan on 2026-08-22. On 2026-09-15
+they were reconciled with Rev 3:
+
+- **Closed, done:** ME-1 measure (#26), SW-A2 deck encoded (#3), SW-B1
+  fullscreen (#5), SW-B2 nav (#6), SW-B3 idle reset (#7), SW-D1 boot-to-kiosk
+  (#12), EL-1 bench bring-up (#20, on the OptiPlex rather than a Pi).
+- **Closed, obsolete under Rev 3:** everything about buttons, GPIO, uinput,
+  the hinge, the door, the frame, the de-cased monitor, and USB content
+  sticks: #8, #9, #10, #11, #14, #21, #22, #24, #28, #29, #30, #31, #32.
+- **Re-scoped for Rev 3:** #1 (polycarbonate in the aperture, still
+  deferred), #2 content data file, #4 deploy script, #13 read-only root, #15
+  watchdog, #16 network posture, #17 golden image, #18–19 usage counts, #23
+  power-cut recovery, #25 Rev 3 BOM, #27 conduit spine mount, #33 finish, #34
+  drawings and `mounting.md`, #35–39 integration.
+- **New:** #40 the three museum-team decisions in §3, #41 emulator
+  hardening, #42 attract loop.
+
+Milestone M2 Measure is closed. M3 Bring-up now means the OptiPlex.
 
 ---
 
 ## 8. Work available in parallel
 
-The **software track is completely untouched and completely unblocked.** It has
-no dependency on the cabinet, the monitor choice, or C1.
-
-### Safe to take — no collision
-
-| Issue | Story |
-|---|---|
-| #2 SW-A1 | Split the screen deck out of `build-app.py` into a `content.json` data file |
-| #3 SW-A2 | Encode the 8-screen deck (UX §4) in that data file |
-| #5–8 SW-B | Kiosk runtime: fullscreen/no chrome, key nav, idle→Home reset, "more" scaffolding |
-| #12–17 SW-D | Pi OS image: boot-to-kiosk, read-only root, USB content mount, watchdog, golden image |
-| #18–19 SW-E | Usage logging + summary |
-| #9–11 SW-C | GPIO service, uinput key mapping — needs a Pi and buttons, not the cabinet |
-
-`src/kiosk-app/` is a **real working app** (`build-app.py` emits a self-contained
-`index.html`). Content is currently hardcoded in the Python; SW-A1 is the natural
-first task and unblocks everything else in the deck.
-
-### Do not take — actively in flight
-
-- `mechanical/` and `mechanical/drawings/` — being reworked as measurements land
-- Anything gated on C1
-- Reconciling the GitHub issue list is *available* but coordinate first, since
-  it touches the same milestones
+- **Mechanical Rev 3**, all of it, blocked only on a tape measure and a
+  monitor arm. Gate 4 first.
+- **Software hardening** (#13, #15, #16, #17) needs the OptiPlex or a
+  throwaway Ubuntu VM. No collision with content work.
+- **Content** lives in `_deck.py` and is being actively edited. Coordinate
+  before touching it. Always run `check-fit.py` afterwards.
+- **The museum decisions** (#40) need a conversation with Doug Crawford, not code.
 
 ### Conventions that matter
 
-- **Commit only files you changed** — `git add <paths>`, never `git add -A`
-- Docs-first: PRD → architecture → UX → dev plan → issues → build
-- No demo fallback: show error states, not demo data
+- **Commit only files you changed.** `git add <paths>`, never `git add -A`
 - Everything is labelled **concept** until built and installed
+- No demo fallback: show error states, not demo data
 - Authoritative knowledge base is the wiki at `~/Workspaces/wiki/`
-  (`projects/concurrent-3280-museum/`); propose changes via wiki-ingest, never
-  write it directly
+  (`projects/concurrent-3280-museum/`); propose changes via wiki-ingest
 
 ---
 
@@ -297,13 +286,14 @@ first task and unblocks everything else in the deck.
 - Perkin-Elmer, *Model 3230 Processor Installation and Maintenance Manual*,
   47-004 R21, 1982 —
   [bitsavers](https://bitsavers.org/pdf/interdata/32bit/3230/47-004R21_3230_Maint_1982.pdf)
-  ([OCR text](https://archive.org/stream/bitsavers_interdata30Maint1982_46790039/47-004R21_3230_Maint_1982_djvu.txt))
 - Datapro, *Concurrent Computer Corporation Supermini Systems*, M11-230-101, Feb 1986 —
   [bitsavers](http://bitsavers.org/pdf/datapro/datapro_reports_70s-90s/Concurrent/M11-230-10_8602_Concurrent_3200.pdf)
+- OS/32 kit: [davygoat/simh-os32](https://github.com/davygoat/simh-os32) v1.2 on
+  [open-simh](https://github.com/open-simh/simh)
 - Site photographs, 2026-08-26 — `mechanical/photos/`
-- Docent concept review — the shared artifact, updated 2026-08-27
+- Ken Yeager's letters, for the team and bring-up screens — cleared by Ruth Yeager
 
 ---
 
-*Written 2026-08-28. The machine in the warehouse is the authority; where this
+*Written 2026-09-15. The machine in the warehouse is the authority; where this
 document and the machine disagree, the machine wins.*
