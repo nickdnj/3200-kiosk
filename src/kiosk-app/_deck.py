@@ -38,6 +38,7 @@ IMG = {
     "__M_DEFENSE__":uri("mont/defense.jpg"),
     "__M_FINANCE__":uri("mont/finance.jpg"),
     "__LOGO__":     uri("renders/vcf-logo.png"),
+    "__CRUNCHER__": uri("renders/cruncher-lives.jpg"),
 }
 
 def inline(html):
@@ -223,7 +224,7 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
 .ticker .run i{color:#e46a4a;font-style:normal}
 @keyframes tick{from{transform:translateX(6cqw)}to{transform:translateX(-100%)}}
 
-/* bring-up slide: CRUNCHER LIVES in the snow - typographic hero until an image lands */
+/* bring-up slide: typographic fallback hero (unused now that the illustration is in) */
 .snow{position:relative;width:100%;aspect-ratio:16/10;border-radius:3px;overflow:hidden;margin:0 0 4.5cqw;
   background:linear-gradient(180deg,#0c1220 0%,#1c2536 38%,#6f7d92 55%,#dfe6ee 62%,#f3f6f9 100%);
   box-shadow:0 1px 4px rgba(0,0,0,.18)}
@@ -370,16 +371,15 @@ CARDS_JS = r"""const CARDS = [
   // Hero is a typographic treatment: no photograph of the snow survives.
   {cls:"ccard", html:`<div class="ek">Bring&#8209;up &middot; 1985&ndash;86</div>
     <h2>Cruncher lives</h2>
-    <div class="snow"><span class="lamp"></span>
-      <div class="word">Cruncher<b>lives</b></div>
-      <span class="cap">Monmouth County, NJ &middot; February 1986 &middot; it rained Monday</span></div>
+    <div class="cimg"><img src="__CRUNCHER__" alt="CRUNCHER LIVES stamped into the snow outside the lab"></div>
+    <div class="cimcap">Monmouth County, NJ &middot; February 1986 &middot; it rained Monday</div>
     <ul class="blist">
       <li><b>Jan 30, 1985</b> &mdash; the pipeline runs its first three instructions. &ldquo;<b>It was great!</b>&rdquo;</li>
       <li>It printed <b>&ldquo;Gans&rdquo;</b> first &mdash; an engineer&rsquo;s weekend tree service</li>
       <li><b>Jan 1986</b> &mdash; the OS boots. Benchmark: <b>3&times; faster</b> than its predecessor</li>
       <li>Two engineers stomped <b>CRUNCHER LIVES</b> into the snow, twelve feet high</li>
     </ul>
-    <div class="morep">From Ken Yeager&rsquo;s letters home &middot; illustration &mdash; no photograph of the snow survives</div>`},
+    <div class="morep">From Ken Yeager&rsquo;s letters home &middot; AI illustration &mdash; no photograph of the snow survives</div>`},
 
   {cls:"ccard", html:`<div class="ek">A quiet first</div>
     <h2>The line that set Unix free</h2>
