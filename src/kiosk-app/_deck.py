@@ -287,7 +287,7 @@ CARDS_JS = r"""const CARDS = [
     <div class="cimg"><img src="__INTERIOR__" alt="The 3280 circuit boards"></div>
     <ul class="blist">
       <li>Built for jobs <b>too big for any desktop</b></li>
-      <li>Grew to <b>12 processors</b> working as one</li>
+      <li>Its big brother, the <b>3280E</b>, grew to <b>12 processors</b> working as one</li>
       <li>Every circuit board <b>wired by hand</b></li>
     </ul>`},
 
