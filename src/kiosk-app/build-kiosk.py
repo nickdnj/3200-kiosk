@@ -8,7 +8,7 @@ masthead, no cabinet render and no modal: the deck IS the screen.
     python3 build-kiosk.py --panel 27 -> same, sized for a 27" panel
 
 Content comes from _deck.py, shared byte-for-byte with the concept page, so
-Rick's approved copy can never drift between the two.
+the docent-approved copy can never drift between the two.
 
 The one transform applied here: the deck's type was laid out for a 230:529 box
 (the concept page's screen). A real 16:9 panel in portrait is 9:16 - propor-

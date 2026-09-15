@@ -70,12 +70,12 @@ The honest consequence is in `docs/02-architecture.md` §15: body bullets now
 subtend 13.6 arcmin at 6 ft against a 16 arcmin comfort threshold. At arm's
 length — where you must stand to touch anything — they are at 33. The headline
 still carries the room. Cutting one bullet per screen would buy ~29% more
-type, and that is Rick's call.
+type, and that is the museum team's call.
 
 ## Still open
 
 - Decouple content from `_deck.py` into a data file non-devs can edit.
-- Anonymous screen-view counts (Rick's ask) — needs a privacy decision first.
+- Anonymous screen-view counts (a museum-team ask) — needs a privacy decision first.
 - An attract loop with motion, if the still HOME screen doesn't pull people in.
 
 ## Which 3280? (read before adding specs)
