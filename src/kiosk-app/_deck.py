@@ -227,8 +227,7 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
 # ---- what the screens say. Nine of them, in order.
 CARDS_JS = r"""const CARDS = [
   // HOME &mdash; the whole story in one screen
-  {cls:"ccard", html:`<div class="ek">The Concurrent 3280</div>
-    <h2>This computer was made in New Jersey<span class="h2sub">Deployed everywhere &middot; 1981&ndash;1986</span></h2>
+  {cls:"ccard", html:`<h2>The Concurrent 3280 was made in New Jersey<span class="h2sub">Deployed everywhere &middot; 1981&ndash;1986</span></h2>
     <div class="mont4">
       <div class="mp" style="background-image:url('__M_WEATHER__')"><span class="tag">Weather</span></div>
       <div class="mp" style="background-image:url('__M_SPACE__');background-position:center 28%"><span class="tag">Space</span></div>
@@ -346,7 +345,7 @@ CARDS_JS = r"""const CARDS = [
       <li><span class="nm">Bob Reago</span> &mdash; <span class="rl">Memory interface</span></li>
       <li><span class="nm">Dan Masi</span> &mdash; <span class="rl">Microcode</span></li>
       <li><span class="nm">Bob Philhower</span> &mdash; <span class="rl">Microcode</span><span class="dt">&rarr; IBM: the <b>PlayStation&nbsp;3 &amp; Xbox&nbsp;360</b> processors, POWER4&ndash;11</span></li>
-      <li><span class="nm">Mike Martone</span> &mdash; <span class="rl">Lab bring&#8209;up &amp; first field install</span><span class="dt">&rarr; forty years on, posted the lab phone list that started this exhibit</span></li>
+      <li><span class="nm">Mike Martone</span> &mdash; <span class="rl">Lab bring&#8209;up &amp; first field install</span></li>
       <li><span class="nm">Dan Neim</span> &mdash; <span class="rl">Project manager</span></li>
       <li><span class="nm">Yuk&#8209;Ming Lam</span> &mdash; <span class="rl">Program manager</span></li>
     </ul>
