@@ -8,6 +8,11 @@ looks. Two builders consume it:
 Content is docent-approved (Rick Lewis). Edit it HERE, nowhere else, and
 rebuild both targets. Never hand-edit a generated index.html.
 """
+# NOTE (Nick DeMarco, 2026-09-15): THE MUSEUM'S MACHINE IS A CONCURRENT 3280 -
+# the single-processor machine (~6 MIPS). It is NOT the 3280E MPS, the 2-12 CPU
+# multiprocessor (76.8 aggregate MIPS, S-Bus dual data paths). Do not attribute
+# MPS specs to "this machine" anywhere in the deck. A "Twelve brains, one
+# machine" slide was removed for exactly this reason.
 import base64, mimetypes, pathlib
 
 HERE = pathlib.Path(__file__).parent
@@ -287,15 +292,6 @@ CARDS_JS = r"""const CARDS = [
     </ul>`},
 
   // NEW JERSEY
-  {cls:"ccard", html:`<div class="ek">Under the hood &middot; power</div>
-    <h2>Twelve brains, one machine</h2>
-    <div class="bignum">76.8<small>aggregate MIPS &middot; 1988</small></div>
-    <ul class="blist">
-      <li>Up to <b>12 processors</b> shared one memory</li>
-      <li>Over the <b>S&#8209;Bus</b> &mdash; two data paths at once</li>
-      <li>A design patented in <b>Ken Yeager&rsquo;s name</b>, 1986</li>
-    </ul>`},
-
   {cls:"ccard", html:`<div class="ek">Where it was born</div>
     <h2>Made in Monmouth County</h2>
     <div class="cimg"><img src="__NJPLANT__" alt="Concurrent's New Jersey plant"></div>
@@ -313,7 +309,7 @@ CARDS_JS = r"""const CARDS = [
       <li><span class="yr">1973</span><span class="ev"><b>Perkin&#8209;Elmer</b> buys it, moves to Tinton Falls</span></li>
       <li><span class="yr">1975</span><span class="ev">the <b>8/32</b> &mdash; NASA&rsquo;s Shuttle simulator ran on it</span></li>
       <li><span class="yr">1985</span><span class="ev"><b>Concurrent</b> spins off &mdash; same lab, same people</span></li>
-      <li><span class="yr">1988</span><span class="ev">the <b>3280</b> ships &mdash; 12 CPUs, 76.8 MIPS</span></li>
+      <li><span class="yr">1988</span><span class="ev">the <b>3280</b> ships &mdash; 6 MIPS, one processor</span></li>
       <li><span class="yr">1990s</span><span class="ev">the line pivots to <b>MIPS</b> chips</span></li>
     </ul>`},
 

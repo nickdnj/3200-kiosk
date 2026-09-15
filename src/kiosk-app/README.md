@@ -77,3 +77,11 @@ type, and that is Rick's call.
 - Decouple content from `_deck.py` into a data file non-devs can edit.
 - Anonymous screen-view counts (Rick's ask) — needs a privacy decision first.
 - An attract loop with motion, if the still HOME screen doesn't pull people in.
+
+## Which 3280? (read before adding specs)
+
+The museum's machine is a **Concurrent 3280** — the **single-processor**
+machine, ~6 MIPS. It is **not the 3280E MPS**, the 2–12 CPU multiprocessor
+(76.8 aggregate MIPS, the S-Bus dual data paths). Exhibit copy must never
+attribute MPS specs to "this machine." A "Twelve brains, one machine" slide was
+removed on 2026-09-15 for exactly this reason (Nick DeMarco, Concurrent alum).
