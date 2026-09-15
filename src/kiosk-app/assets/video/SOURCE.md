@@ -52,7 +52,9 @@ isn't shipped in the shareable artifact).
 
 # f16sim-loop.mp4 — provenance
 
-56-second silent loop for the Defense slide.
+56-second silent loop, cut for a Defense slide that was **removed from the deck
+on 2026-09-15 at Nick's request**. Clip retained here (public domain, documented)
+in case it returns; not referenced by any screen.
 
 - **Source:** "F-16 Simulator B-roll", **U.S. Air Force** via DVIDS (asset 723256,
   DOD_107455891). A USAF pilot in an F-16 Fighting Falcon simulator, Arlington,

@@ -80,7 +80,7 @@ ok("bullets still legible at 6 ft", arcmin(BULLET_IN * XH, 6) >= 10,
    f"{arcmin(BULLET_IN*XH,6):.1f}' - below the 16' comfort line, see NOTE")
 ok("deck + prog + nav = the panel", DECK_PX + PROG_PX + NAV_PX == NAT_H,
    f"{DECK_PX} + {PROG_PX} + {NAV_PX} = {NAT_H}")
-ok("17 deck screens", _deck.N_CARDS == 17, f"{_deck.N_CARDS} cards")
+ok("16 deck screens", _deck.N_CARDS == 16, f"{_deck.N_CARDS} cards")
 ok("idle reset in the 60-90 s band", 60 <= A.idle <= 90, f"{A.idle} s")
 
 # ---- scale the deck CSS ---------------------------------------------------
