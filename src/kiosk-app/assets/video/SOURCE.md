@@ -47,3 +47,44 @@ isn't shipped in the shareable artifact).
   docent review; the 8/32 is the ancestor line, not the 3280 model itself.
 - **Cut:** three segments (launch, orbiter-over-Earth ×2), muted, H.264, via the
   same ffmpeg concat recipe as the NOAA loop.
+
+---
+
+# f16sim-loop.mp4 — provenance
+
+56-second silent loop for the Defense slide.
+
+- **Source:** "F-16 Simulator B-roll", **U.S. Air Force** via DVIDS (asset 723256,
+  DOD_107455891). A USAF pilot in an F-16 Fighting Falcon simulator, Arlington,
+  Texas, June 26, 2019 — "the simulator models all of the fighter aircraft's
+  weapon systems and ordnance, supporting basic and advanced pilot mission
+  training, tactics validation, and mission rehearsal."
+- **Rights:** US federal (USAF) work — **public domain**. Credited on-screen.
+- **Honesty note:** 2019 footage of *the kind of trainer* Concurrent's real-time
+  machines drove (F-16/F-15 simulators, per FlightGlobal '96 via the wiki) —
+  not a 1980s Concurrent-driven sim itself. Flagged for docent review.
+- **Cut:** four segments (dome edge / HUD over city / tanker refuel / HUD over
+  desert), 1024x576 source → 640x360, muted, H.264, ffmpeg concat.
+
+---
+
+# nyse-loop.mp4 — provenance
+
+56-second silent loop for the Finance slide.
+
+- **Source:** "Vista Stock Shots: New York Stock Exchange" — **Prelinger Archives**
+  via Internet Archive (`0803_Vista_Stock_Shots_New_York_Stock_Exchange_13_00_55_00`),
+  described as "excellent traders and floor action." Old color stock; a light
+  brightness/contrast lift (eq) applied so it reads on the panel.
+- **Rights:** Prelinger Archives collection — **public domain**. Credited on-screen.
+- **The slide's facts:** RELIANCE = Perkin-Elmer's transaction-processing system
+  (ITC + DMS/32 + COBOL) "on any of Perkin-Elmer's 32-bit minicomputers,"
+  maintaining performance "under extremely heavy transaction volume," with
+  transaction units, secure logging, fast recovery — *Datapro Series 3200
+  report, Dec 1979*, which also sampled "a supplier of systems for banks" among
+  users and cites 2,500 installed 32-bit systems. "Many operating order-routing
+  systems were overwhelmed during the 1987 stock market crash" — *U.S. Office
+  of Technology Assessment, 1990*. No single named NYSE/bank customer is in the
+  public record; flagged for docent review (Nick may know one).
+- **Cut:** four segments (wide floor / overhead post / crowded post / clerk's
+  slips), 640x480, muted, H.264, ffmpeg concat.
