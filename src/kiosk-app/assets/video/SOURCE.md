@@ -29,3 +29,18 @@ ffmpeg -i nexrad-raw.mp4 -filter_complex \
 Deployed on the kiosk at `/opt/3280-kiosk/nexrad-loop.mp4`; the page references
 it by relative path. The concept page shows a still poster instead (the mp4
 isn't shipped in the shareable artifact).
+
+---
+
+# shuttle-loop.mp4 — provenance
+
+63-second silent loop for the Space slide.
+
+- **Source:** "Space Shuttle Launch and Landing Highlights", **NASA**, via
+  Internet Archive (`SpaceShuttleLaunchAndLandingHighlights`, 720p).
+- **Rights:** NASA — **public domain**. Credited on-screen.
+- **Honesty note:** the Space link is **MASSCOMP** (its real-time computers were
+  used in the Space Shuttle program), which **Concurrent acquired in 1988** —
+  not the 3280 itself. The slide says exactly that. Flagged for docent review.
+- **Cut:** three segments (launch, orbiter-over-Earth ×2), muted, H.264, via the
+  same ffmpeg concat recipe as the NOAA loop.
