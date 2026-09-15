@@ -230,10 +230,16 @@ wire(tBack,()=>go(-1)); wire(tNext,()=>go(1)); wire(tHome,()=>show(0));
 
 /* Idle: put it back on HOME so the next visitor starts at the start. */
 const IDLE=__IDLE__*1000; let timer=null;
+function idleExpired(){
+  // a slide playing a video is its own attract loop - let it run until the
+  // visitor navigates, rather than yanking back to Home mid-clip
+  if(nodes[i] && nodes[i].querySelector('video')){ timer=setTimeout(idleExpired,IDLE); return; }
+  show(0); document.body.classList.add('idle');
+}
 function awake(){
   document.body.classList.remove('idle');
   clearTimeout(timer);
-  timer=setTimeout(()=>{show(0);document.body.classList.add('idle');},IDLE);
+  timer=setTimeout(idleExpired,IDLE);
 }
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev,awake,{passive:true}));
 
