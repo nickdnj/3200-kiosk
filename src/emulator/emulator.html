@@ -138,7 +138,16 @@
   const USERS = ['fred','wilma','barney'];   // account 25 (all "good for everything")
   let ws, userIdx=0, signonTries=0, manualClose=false;
 
-  function send(s){ if(ws && ws.readyState===1) ws.send(s); }
+  // Follow the output. xterm only auto-scrolls when the viewport is already at
+  // the bottom, and the lesson card resizing the terminal leaves it elsewhere.
+  // So: snap to the bottom on anything we send and on anything that arrives,
+  // unless the visitor scrolled up by hand in the last few seconds (help * is
+  // long and worth reading).
+  let lastManualScroll = 0;
+  const termEl = document.getElementById('term');
+  ['wheel','touchmove'].forEach(ev=>termEl.addEventListener(ev, ()=>{ lastManualScroll=Date.now(); }, {passive:true}));
+  function tail(force){ if(force || Date.now()-lastManualScroll > 4000){ try{ term.scrollToBottom(); }catch(_){} } }
+  function send(s){ if(ws && ws.readyState===1){ ws.send(s); tail(true); } }
   function doSignon(){
     signonTries++;
     const u = USERS[userIdx % USERS.length];
@@ -154,7 +163,7 @@
       setTimeout(doSignon, 900);
     };
     ws.onmessage = (e)=>{
-      const data = e.data; term.write(data);
+      const data = e.data; term.write(data, ()=>tail(false));
       // self-heal: recover from the two things that strand a visitor
       if(/SIGNON REQUIRED/.test(data) && signonTries < 6){
         setTimeout(doSignon, 300);
@@ -262,7 +271,7 @@
     document.getElementById('l-close').addEventListener('pointerdown',e=>{e.preventDefault(); toggleLessons(false);});
     refit();
   }
-  function refit(){ setTimeout(()=>{ try{fit.fit();}catch(_){} }, 30); }
+  function refit(){ setTimeout(()=>{ try{fit.fit();}catch(_){} tail(true); }, 30); }
   function startLesson(i){ cur=LESSONS[i]; stepIdx=0; renderStep(); }
   function renderStep(){
     const st = cur.steps[stepIdx]; stepDone = !st.cmd;
@@ -297,7 +306,7 @@
     const o = open===undefined ? !lessonEl.classList.contains('open') : open;
     lessonEl.classList.toggle('open', o);
     if(o && !cur) renderMenu();
-    setTimeout(()=>{ try{fit.fit();}catch(_){} }, 30);
+    refit();
   }
   document.getElementById('lessons').addEventListener('pointerdown', e=>{ e.preventDefault(); toggleLessons(); });
   // nothing permanent: if a visitor walks off mid-lesson, delete their file
