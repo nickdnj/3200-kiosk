@@ -324,7 +324,9 @@ CARDS_JS = r"""const CARDS = [
   // ARCHITECTURE - six screens. Every fact below is from Concurrent's own
   // manuals: 63-002 R00 "System Bus Theory" (1987) Fig. 1-1 names the four
   // processor boards VAT / FET / ALU / MPY and the S-bus T-path / F-path at
-  // 10 MHz; 50-045R00 "3280 Product Overview" (1989) pp.29-35 gives "four
+  // 10 MHz (the four boards sit in a backplane - per Nick, who was there;
+  // the diagram's 'B-bus cable' is the link to the bus interface, not how the
+  // boards join each other); 50-045R00 "3280 Product Overview" (1989) pp.29-35 gives "four
   // processor boards", the four pipeline stages, the instruction/data caches
   // and prefetch, the parallel multiplier, the register sets, and the 6.4 MIPS
   // Whetstone rating. Engineers per the roster screen (Ken Yeager's letters,
@@ -342,8 +344,8 @@ CARDS_JS = r"""const CARDS = [
         <rect class="bx" x="11" y="49" width="46" height="10" rx="1"/><text class="t" x="34" y="56">ALU</text>
         <rect class="bx" x="11" y="61" width="46" height="10" rx="1"/><text class="t" x="34" y="68">MPY</text>
       </g>
-      <text class="s w" x="34" y="80" font-size="3.4" text-anchor="middle">four boards, one ribbon cable</text>
-      <text class="s w" x="34" y="85.5" font-size="3.4" text-anchor="middle">to the bus</text>
+      <text class="s w" x="34" y="80" font-size="3.4" text-anchor="middle">four boards, plugged into</text>
+      <text class="s w" x="34" y="85.5" font-size="3.4" text-anchor="middle">one backplane</text>
       <line class="ln" x1="63" y1="50" x2="80" y2="50"/>
       <line class="ln hot" x1="80" y1="6" x2="80" y2="94" marker-end="url(#arA)"/>
       <line class="ln hot" x1="92" y1="94" x2="92" y2="6" marker-end="url(#arA)"/>
@@ -360,7 +362,7 @@ CARDS_JS = r"""const CARDS = [
     </svg></div>
     <div class="cimcap">Concurrent Computer Corp. manuals, 1987&ndash;89</div>
     <ul class="blist">
-      <li>The processor is <b>four boards</b>, joined to the bus by one ribbon cable</li>
+      <li>The processor is <b>four boards</b> plugged into a backplane</li>
       <li>A <b>10 MHz bus</b> with two one&#8209;way lanes: to memory, and back</li>
       <li>Everything else &mdash; <b>disks, tapes, terminals</b> &mdash; hangs off the I/O side</li>
     </ul>`},
