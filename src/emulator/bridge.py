@@ -66,11 +66,26 @@ async def handler(ws, path=None):   # websockets 10.x passes path, 11+ does not
             if isinstance(msg, str): msg = msg.encode("latin-1")
             writer.write(msg); await writer.drain()
 
+    # Whichever side ends first, the other is done too. Waiting for both left
+    # the telnet line open (OS/32 never sends EOF), so a browser that was
+    # killed or simply left kept its MTM line - and its username - forever.
+    t1 = asyncio.create_task(tcp_to_ws())
+    t2 = asyncio.create_task(ws_to_tcp())
     try:
-        await asyncio.gather(tcp_to_ws(), ws_to_tcp())
+        await asyncio.wait({t1, t2}, return_when=asyncio.FIRST_COMPLETED)
     except (websockets.ConnectionClosed, ConnectionResetError):
         pass
     finally:
+        for t in (t1, t2):
+            t.cancel()
+        # Free the line for the next visitor: back out of the editor if we
+        # were in it, clear a paused task, sign off. Harmless at a bare prompt.
+        try:
+            writer.write(b"\r\rend\r\rend\r\rcancel\r\rsignoff\r")
+            await writer.drain()
+            await asyncio.sleep(1.5)
+        except Exception:
+            pass
         writer.close()
 
 

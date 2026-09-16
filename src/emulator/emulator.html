@@ -135,8 +135,11 @@
 
   // ---- websocket to the OS/32 bridge ----
   const statusEl = document.getElementById('status');
-  const USERS = ['fred','wilma','barney'];   // account 25 (all "good for everything")
-  let ws, userIdx=0, signonTries=0, manualClose=false;
+  // A fresh username per session. MTM needs usernames to be unique across
+  // signed-on lines; three fixed names ran out as soon as a few sessions were
+  // abandoned. The account (25) and password are what actually authenticate.
+  const newUser = ()=>'V'+Math.random().toString(36).slice(2,7).toUpperCase().replace(/[^A-Z0-9]/g,'X');
+  let ws, user=newUser(), signonTries=0, manualClose=false;
 
   // Follow the output. xterm only auto-scrolls when the viewport is already at
   // the bottom, and the lesson card resizing the terminal leaves it elsewhere.
@@ -150,12 +153,11 @@
   function send(s){ if(ws && ws.readyState===1){ ws.send(s); tail(true); } }
   function doSignon(){
     signonTries++;
-    const u = USERS[userIdx % USERS.length];
     statusEl.textContent = 'signing in\u2026';
-    send('signon '+u+',25,user1\r');
+    send('signon '+user+',25,user1\r');
   }
   function connect(){
-    manualClose=false; signonTries=0; userIdx=Math.floor(Math.random()*USERS.length);
+    manualClose=false; signonTries=0; user=newUser();
     ws = new WebSocket('ws://127.0.0.1:7682');
     ws.onopen = ()=>{
       statusEl.textContent='connected'; statusEl.classList.add('on');
@@ -168,7 +170,7 @@
       if(/SIGNON REQUIRED/.test(data) && signonTries < 6){
         setTimeout(doSignon, 300);
       } else if(/DUPLICATE USERNAME/.test(data) && signonTries < 6){
-        userIdx++; setTimeout(doSignon, 300);
+        user=newUser(); setTimeout(doSignon, 300);
       } else if(/OS\/32 TERMINAL MONITOR|^-\s*$/m.test(data)){
         signonTries=0; statusEl.textContent='ready'; statusEl.classList.add('on');
       }
