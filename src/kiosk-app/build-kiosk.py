@@ -96,7 +96,7 @@ DECK_CSS = rescale(_deck.SCREEN_CSS, S)
 assert "clamp(" not in DECK_CSS, "a clamp survived rescaling"
 assert "cqwZ" not in DECK_CSS
 
-EMU_CARD = """,\n  {cls:"ccard", html:`<div class="ek">Try it yourself</div>\n    <h2>Sit down at the machine</h2>\n    <ul class="blist"><li>This kiosk runs real <b>OS/32</b> in emulation</li>\n      <li>Type at it like an operator did in <b>1985</b></li></ul>\n    <a href="emulator.html" class="emu-launch">Start typing &#8594;</a>\n    <div class="emu-note">An on&#8209;screen keyboard appears. Try <b>help</b> or <b>display&nbsp;time</b>.</div>`}"""
+EMU_CARD = """,\n  {cls:"ccard", html:`<div class="ek">Try it yourself</div>\n    <h2>Sit down at the machine</h2>\n    <ul class="blist"><li>This kiosk runs real <b>OS/32</b> in emulation</li>\n      <li>Type at it like an operator did in <b>1985</b></li>\n      <li>Guided lessons: <b>write and run your own program</b></li></ul>\n    <a href="emulator.html" class="emu-launch">Start typing &#8594;</a>\n    <div class="emu-note">An on&#8209;screen keyboard appears, and a lesson can type the commands for you.</div>`}"""
 CARDS_JS = _deck.CARDS_JS.rstrip()
 assert CARDS_JS.endswith("];"), "deck did not end as expected"
 CARDS_JS = CARDS_JS[:-2] + EMU_CARD + "\n];"

@@ -6,7 +6,7 @@ telnet mux on :1026 (SIMH PAS device). This bridges a WebSocket (:7682) to it,
 answering telnet option negotiation so control bytes never reach the screen.
 Each browser connection gets its own MTM line.
 
-websockets 10.x: handler signature is (websocket, path).
+websockets 10.x calls handler(websocket, path); 11+ calls handler(websocket). Both work.
 """
 import asyncio
 import websockets
@@ -43,7 +43,7 @@ class Telnet:
         return bytes(out), bytes(resp)
 
 
-async def handler(ws, path):
+async def handler(ws, path=None):   # websockets 10.x passes path, 11+ does not
     try:
         reader, writer = await asyncio.open_connection(MTM_HOST, MTM_PORT)
     except OSError:
