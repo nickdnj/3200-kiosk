@@ -192,6 +192,18 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
 .diag .t.w{fill:#f7f2e4} .diag .t.a{fill:var(--screen-accent)}
 .diag .s{fill:var(--screen-mut);font-family:"Archivo",sans-serif;font-weight:500}
 .diag .s.w{fill:#f1e9d4}
+/* team slide: the architect beside a plate that says where the lab was */
+.duo{display:grid;grid-template-columns:38fr 62fr;gap:2.4cqw;margin:0 0 4.5cqw}
+.duo .por{aspect-ratio:3/4;border-radius:3px;overflow:hidden;background:#d9d1bd;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.duo .por img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
+.plate{display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;background:#2a2620;color:#f3ecda;
+  border-radius:3px;padding:4cqw 4.5cqw;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.plate .pk{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(7px,3cqw,11px);color:var(--screen-gold)}
+.plate .addr{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(12px,5.8cqw,23px);line-height:1.06;letter-spacing:-.01em}
+.plate .addr small{display:block;font-weight:500;font-size:.6em;color:#cdbf9f;margin-top:1.4cqw;letter-spacing:0}
+.plate .who{font-family:"Oswald",sans-serif;font-size:clamp(8px,3.3cqw,12px);letter-spacing:.05em;color:#e7dcc0;line-height:1.45;
+  border-top:1px solid #4a4438;padding-top:2.2cqw}
+.plate .who b{color:#f6dc8c;font-weight:600}
 /* animated NEXRAD-style Doppler scope - CSS only, loops forever */
 .radar-wrap{display:flex;flex-direction:column;align-items:center;gap:3cqw;margin:1cqw 0 4cqw}
 .radar{position:relative;width:70cqw;height:70cqw;border-radius:50%;
@@ -547,10 +559,17 @@ CARDS_JS = r"""const CARDS = [
 
   {cls:"ccard", html:`<div class="ek">Who built it</div>
     <h2>Built by a small team</h2>
-    <div class="cimg"><img src="__YEAGER__" alt="Ken Yeager"></div>
-    <div class="cimcap">Ken Yeager &middot; lead architect</div>
+    <div class="duo">
+      <div class="por"><img src="__YEAGER__" alt="Ken Yeager"></div>
+      <div class="plate">
+        <div class="pk">The lab</div>
+        <div class="addr">106 Apple Street<small>Tinton Falls, New Jersey 07724</small></div>
+        <div class="who"><b>Perkin&#8209;Elmer</b> Data Systems Group, then <b>Concurrent Computer</b> from 1985<br><b>16 engineers</b> &middot; <b>4</b> processor boards &middot; <b>1</b> lab</div>
+      </div>
+    </div>
+    <div class="cimcap">Ken Yeager &middot; lead architect &middot; the address, from Concurrent&rsquo;s own manuals</div>
     <ul class="blist">
-      <li>About <b>15 engineers</b>, in one New Jersey lab</li>
+      <li><b>16 engineers</b> in one lab on <b>Apple Street</b>, Tinton Falls</li>
       <li>One later designed the chip inside the <b>PlayStation 3 &amp; Xbox 360</b></li>
       <li>Its lead architect went on to <b>SGI</b> &mdash; and his chip is <b>in this museum</b></li>
     </ul>`},
