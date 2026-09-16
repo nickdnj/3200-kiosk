@@ -312,14 +312,6 @@ CARDS_JS = r"""const CARDS = [
     </ul>
     <div class="morep">NYSE floor (public domain) &middot; Telerate: Yeager letters &middot; RELIANCE: Datapro 1979 &middot; 1987: OTA 1990</div>`},
 
-  {cls:"ccard", html:`<div class="ek">Under the hood</div>
-    <h2>Big iron, built by hand</h2>
-    <div class="cimg"><img src="__INTERIOR__" alt="The 3280 circuit boards"></div>
-    <ul class="blist">
-      <li>Built for jobs <b>too big for any desktop</b></li>
-      <li>Its big brother, the <b>3280E</b>, grew to <b>12 processors</b> working as one</li>
-      <li>Every circuit board <b>wired by hand</b></li>
-    </ul>`},
 
   // ARCHITECTURE - six screens. Every fact below is from Concurrent's own
   // manuals: 63-002 R00 "System Bus Theory" (1987) Fig. 1-1 names the four
