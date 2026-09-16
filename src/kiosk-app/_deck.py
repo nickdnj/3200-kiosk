@@ -230,6 +230,9 @@ SCREEN_CSS = r""".display{position:relative;container-type:inline-size;overflow:
 .tl li{display:flex;gap:3cqw;align-items:baseline;font-size:clamp(9px,4.2cqw,14px)}
 .tl .yr{font-family:"Space Mono",monospace;font-weight:700;color:var(--screen-accent);flex:0 0 auto;min-width:12cqw}
 .tl .ev{color:var(--screen-ink)} .tl .ev b{color:var(--screen-ink)}
+.tl.dense{gap:3.2cqw;margin-top:2cqw} .tl.dense li{font-family:"Archivo",sans-serif;font-weight:500;
+  font-size:clamp(12px,5.9cqw,24px);line-height:1.22;align-items:flex-start;gap:3.5cqw}
+.tl.dense .yr{min-width:17cqw;font-size:.9em;padding-top:.08em} .tl.dense .ev b{color:var(--screen-accent);font-weight:700}
 .bignum{font-family:"Space Mono",monospace;font-weight:700;color:var(--screen-accent);
   font-size:clamp(30px,17cqw,66px);line-height:1;text-align:center;margin:2cqw 0 1cqw}
 .bignum small{display:block;font-family:"Oswald",sans-serif;font-size:.22em;letter-spacing:.14em;
@@ -546,15 +549,43 @@ CARDS_JS = r"""const CARDS = [
     </ul>`},
 
   // THE PEOPLE
-  {cls:"ccard", html:`<div class="ek">Where it was born &middot; lineage</div>
+  // LINEAGE - two screens. Sources, checked 2026-09-16: Wikipedia "Interdata"
+  // and "Interdata 7/32 and 8/32" (founding, model years, 7/32 under $10,000,
+  // Shuttle simulator, Wollongong Unix, Perkin-Elmer Edition 7); Wikipedia
+  // "Concurrent Computer Corporation" (Nov 1985 spin-off, Holmdel then Tinton
+  // Falls 1987, MASSCOMP Sep 1988, Series 8000 on MIPS R3000, Harris June 1996
+  // + Fort Lauderdale, Oceanport plant sold 1997, RedHawk/iHawk, 2017 sale to
+  // Battery Ventures as Concurrent Real-Time); concurrent-rt.com (Spectris,
+  // July 2021; RedHawk Linux still sold); Datapro M11-230-101, Feb 1986 (3280
+  // introduced Sep 1985 at 4 MIPS, "code-named the Cruncher"; 3210 Sep 1981,
+  // 3205 May 1983, 3250 Jul 1983); bitsavers manual dates (3220 Jan 1979);
+  // the wiki's history page (NEXRAD Dec 1987, 195 sites; 3280SP Jan 1988 at
+  // 6 MIPS; the museum's own Interdata is a Model 4). 7/32 year: Wikipedia's
+  // two articles say 1973 and 1974; the 32-bit reference manual is June 1974.
+  {cls:"ccard", html:`<div class="ek">Where it was born &middot; lineage 1 of 2</div>
     <h2>Sixty years, one New Jersey lab</h2>
-    <ul class="tl">
-      <li><span class="yr">1966</span><span class="ev"><b>Interdata</b> founded, Oceanport NJ</span></li>
-      <li><span class="yr">1973</span><span class="ev"><b>Perkin&#8209;Elmer</b> buys it, moves to Tinton Falls</span></li>
-      <li><span class="yr">1975</span><span class="ev">the <b>8/32</b> &mdash; NASA&rsquo;s Shuttle simulator ran on it</span></li>
-      <li><span class="yr">1985</span><span class="ev"><b>Concurrent</b> spins off &mdash; same lab, same people</span></li>
-      <li><span class="yr">1988</span><span class="ev">the <b>3280</b> ships &mdash; 6 MIPS, one processor</span></li>
-      <li><span class="yr">1990s</span><span class="ev">the line pivots to <b>MIPS</b> chips</span></li>
+    <ul class="tl dense">
+      <li><span class="yr">1966</span><span class="ev"><b>Interdata</b> founded in Oceanport by Daniel Sinnott</span></li>
+      <li><span class="yr">1967</span><span class="ev">the <b>Model 3</b>, then the <b>Model 4</b> &mdash; 16&#8209;bit minis. A Model 4 is in this museum</span></li>
+      <li><span class="yr">1973</span><span class="ev"><b>Perkin&#8209;Elmer</b> buys Interdata: the Data Systems Group</span></li>
+      <li><span class="yr">1974</span><span class="ev">the <b>7/32</b> &mdash; the first 32&#8209;bit minicomputer under $10,000</span></li>
+      <li><span class="yr">1975</span><span class="ev">the <b>8/32</b> &mdash; 36 of them ran NASA&rsquo;s Shuttle simulator</span></li>
+      <li><span class="yr">1977</span><span class="ev"><b>Unix</b> runs on a 7/32 &mdash; the first computer outside DEC to run it</span></li>
+      <li><span class="yr">1979</span><span class="ev">the <b>3200 series</b>: 3220, then 3210, 3250, 3205 &mdash; the family this machine belongs to</span></li>
+      <li><span class="yr">1985</span><span class="ev">the <b>3280</b> is announced, code&#8209;named <b>Cruncher</b></span></li>
+    </ul>`},
+
+  {cls:"ccard", html:`<div class="ek">Where it was born &middot; lineage 2 of 2</div>
+    <h2>&hellip;and what came after</h2>
+    <ul class="tl dense">
+      <li><span class="yr">1985</span><span class="ev"><b>Concurrent Computer</b> spins off from Perkin&#8209;Elmer &mdash; same lab, same people</span></li>
+      <li><span class="yr">1987</span><span class="ev"><b>NEXRAD</b>: 195 weather radars, the biggest job the company ever ran</span></li>
+      <li><span class="yr">1988</span><span class="ev">the <b>3280</b> ships at 6 MIPS &mdash; this machine&rsquo;s model. Concurrent merges with MASSCOMP</span></li>
+      <li><span class="yr">1990s</span><span class="ev"><b>Series 8000</b> on MIPS chips &mdash; the Interdata instruction set retires</span></li>
+      <li><span class="yr">1996</span><span class="ev">merges with <b>Harris</b> and moves to Florida. The Oceanport plant is sold in 1997</span></li>
+      <li><span class="yr">2000s</span><span class="ev"><b>RedHawk Linux</b> and iHawk &mdash; real&#8209;time work, now on Linux</span></li>
+      <li><span class="yr">2017</span><span class="ev">becomes <b>Concurrent Real&#8209;Time</b>; bought by Spectris in 2021</span></li>
+      <li><span class="yr">today</span><span class="ev">still selling real&#8209;time systems &mdash; <b>sixty years</b> after Oceanport</span></li>
     </ul>`},
 
   {cls:"ccard", html:`<div class="ek">Who built it</div>

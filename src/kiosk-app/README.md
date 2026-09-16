@@ -5,7 +5,7 @@
 > and nowhere else. The cabinet imagery on the concept page is AI concept art.
 > Keep the "Concept" marker until the piece is built and installed.
 
-Twenty-one screens telling the Concurrent 3280's story, plus a final one that
+Twenty-two screens telling the Concurrent 3280's story, plus a final one that
 hands the visitor a live OS/32 terminal (see `../emulator/`). Driven by
 **three commands — BACK / HOME / NEXT**. As of Rev 3 those are on-screen touch
 targets rather than physical switches, but the deck itself never knew the
@@ -36,12 +36,12 @@ reviewed words, so they cannot drift apart. Never hand-edit a generated
 | 3–5 | · weather · space · finance | NEXRAD radar, Shuttle training, trading floors. Real footage, public domain or sourced |
 | 6–7 | Under the hood · the system · the processor | Inline-SVG block diagrams: S-bus, memory, I/O; the four boards and the four-stage pipeline |
 | 8–11 | · FET · VAT · ALU · MPY | One screen per processor board, with a diagram of what it does and who built it |
-| 12–13 | Where it was born | Monmouth County; the sixty-year lab lineage |
-| 14–16 | Who built it | The small team; the Cruncher 2 roster; the 1985–86 bring-up |
-| 17 | A quiet first | The line that set Unix free |
-| 18 | Just down the room | Cross-link to the SGI Onyx |
-| 19–21 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
-| 22 | Try it yourself | Step up and type: a mock OS/32 session, what the emulator is, the launch button (kiosk build only) |
+| 12–14 | Where it was born | Monmouth County; the sixty-year timeline on two screens, Interdata to Perkin-Elmer to Concurrent to Concurrent Real-Time today |
+| 15–17 | Who built it | The small team; the Cruncher 2 roster; the 1985–86 bring-up |
+| 18 | A quiet first | The line that set Unix free |
+| 19 | Just down the room | Cross-link to the SGI Onyx |
+| 20–22 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
+| 23 | Try it yourself | Step up and type: a mock OS/32 session, what the emulator is, the launch button (kiosk build only) |
 
 The architecture screens are drawn from Concurrent's own manuals on bitsavers:
 *System Bus Theory* 63-002 R00 (1987), whose Fig. 1-1 names the four processor
