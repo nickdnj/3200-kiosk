@@ -368,7 +368,7 @@ CARDS_JS = r"""const CARDS = [
       </g>
       <path class="ln hot" d="M100 26 C110 38, 116 52, 122 66" marker-end="url(#arG)" stroke-dasharray="1.5 1.2"/>
       <text class="s" x="134" y="50" font-size="3" text-anchor="middle">Concurrent</text><text class="s" x="134" y="54.5" font-size="3" text-anchor="middle">switches sides</text>
-      <text class="s" x="152" y="94" font-size="2.8" text-anchor="middle">Ken Yeager, chief designer</text>
+      <text class="s" x="157" y="94" font-size="2.8" text-anchor="end">Ken Yeager, chief designer</text>
     </svg></div>
     <div class="cimcap">1984&ndash;1995 &middot; Google Patents, Wikipedia</div>
     <ul class="blist">
