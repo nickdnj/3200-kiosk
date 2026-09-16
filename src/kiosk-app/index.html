@@ -463,6 +463,44 @@ const CARDS = [
   // Whetstone rating. Engineers per the roster screen (Ken Yeager's letters,
   // cleared by Ruth Yeager). The manuals do not say one board = one pipeline
   // stage, so the deck doesn't either.
+  // INTRO to the architecture screens. Every date is sourced: Intel 386 -
+  // pre-production Oct 1985, 275,000 transistors (Wikipedia, i386); MIPS R3000
+  // - June 1988, 115,000 transistors, 5-stage pipeline (Wikipedia, R3000);
+  // R10000 - July 1995, 6.8M transistors, chief designers Chris Rowen and
+  // Kenneth C. Yeager (Wikipedia, R10000); Concurrent Series 8000 on the
+  // R3000 - early 1990s (Wikipedia, Concurrent Computer Corporation);
+  // 3280SP Jan 26 1988 (Tech Monitor); patents: US 4,653,019 barrel shifter,
+  // Hodge & Yeager, filed 1984-04-19, granted 1987-03-24; DE 3722458 A1
+  // S-bus, Yeager, priority 1986-07-07 (Google Patents).
+  {cls:"ccard", html:`<div class="ek">Under the hood &middot; 1985</div>
+    <h2>Built from boards, just before chips won</h2>
+    <div class="diag"><svg viewBox="0 0 160 100" aria-label="Two timelines, 1984 to 1995: board-built processors and single-chip processors">
+      <defs><marker id="arG" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L6 3 0 6z" fill="#123a6b"/></marker></defs>
+      <text class="t a" x="4" y="14" font-size="3.6">Boards</text>
+      <line class="ln hot" x1="4" y1="22" x2="156" y2="22"/>
+      <text class="t" x="4" y="62" font-size="3.6">One chip</text>
+      <line class="ln" x1="4" y1="70" x2="156" y2="70"/>
+      <g font-size="2.9" text-anchor="middle">
+        <circle cx="24" cy="22" r="1.8" fill="#123a6b"/><text class="t" x="24" y="30" font-size="3.2">1984</text><text class="s" x="24" y="35">barrel-shifter</text><text class="s" x="24" y="39.5">patent filed</text>
+        <circle cx="42" cy="22" r="1.8" fill="#123a6b"/><text class="t" x="42" y="30" font-size="3.2">1985</text><text class="s" x="42" y="35">the 3280 is</text><text class="s" x="42" y="39.5">designed here</text>
+        <circle cx="60" cy="22" r="1.8" fill="#123a6b"/><text class="t" x="60" y="30" font-size="3.2">1986</text><text class="s" x="60" y="35">S&#8209;bus patent</text>
+        <circle cx="88" cy="22" r="2.4" fill="#123a6b"/><text class="t" x="88" y="30" font-size="3.2">Jan 1988</text><text class="s" x="88" y="35">the 3280 ships:</text><text class="s" x="88" y="39.5">four boards of chips</text>
+        <circle cx="42" cy="70" r="1.8" fill="#3b3325"/><text class="t" x="42" y="78" font-size="3.2">1985</text><text class="s" x="42" y="83">Intel 386</text><text class="s" x="42" y="87.5">275,000 transistors</text>
+        <circle cx="90" cy="70" r="1.8" fill="#3b3325"/><text class="t" x="90" y="78" font-size="3.2">Jun 1988</text><text class="s" x="90" y="83">MIPS R3000</text><text class="s" x="90" y="87.5">115,000 transistors</text>
+        <circle cx="124" cy="70" r="1.8" fill="#3b3325"/><text class="t" x="124" y="78" font-size="3.2">early 1990s</text><text class="s" x="124" y="83">Concurrent&rsquo;s next</text><text class="s" x="124" y="87.5">machine, on the R3000</text>
+        <circle cx="152" cy="70" r="1.8" fill="#3b3325"/><text class="t" x="152" y="78" font-size="3.2">1995</text><text class="s" x="152" y="83">R10000</text><text class="s" x="152" y="87.5">6.8 million</text>
+      </g>
+      <path class="ln hot" d="M100 26 C110 38, 116 52, 122 66" marker-end="url(#arG)" stroke-dasharray="1.5 1.2"/>
+      <text class="s" x="134" y="50" font-size="3" text-anchor="middle">Concurrent</text><text class="s" x="134" y="54.5" font-size="3" text-anchor="middle">switches sides</text>
+      <text class="s" x="152" y="94" font-size="2.8" text-anchor="middle">Ken Yeager, chief designer</text>
+    </svg></div>
+    <div class="cimcap">1984&ndash;1995 &middot; Google Patents, Wikipedia</div>
+    <ul class="blist">
+      <li>In 1985 a fast computer was still <b>boards of chips</b>, not a chip</li>
+      <li>That autumn Intel put <b>275,000 transistors</b> on one 386</li>
+      <li>Concurrent&rsquo;s next machine ran on a <b>MIPS chip</b> &mdash; its architect designed its successor</li>
+    </ul>`},
+
   {cls:"ccard", html:`<div class="ek">Under the hood &middot; the system</div>
     <h2>Four boards, one bus</h2>
     <div class="diag"><svg viewBox="0 0 160 100" aria-label="3280 system block diagram">
