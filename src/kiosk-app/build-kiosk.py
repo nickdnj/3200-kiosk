@@ -96,10 +96,34 @@ DECK_CSS = rescale(_deck.SCREEN_CSS, S)
 assert "clamp(" not in DECK_CSS, "a clamp survived rescaling"
 assert "cqwZ" not in DECK_CSS
 
-EMU_CARD = """,\n  {cls:"ccard", html:`<div class="ek">Try it yourself</div>\n    <h2>Sit down at the machine</h2>\n    <ul class="blist"><li>This kiosk runs real <b>OS/32</b> in emulation</li>\n      <li>Type at it like an operator did in <b>1985</b></li>\n      <li>Guided lessons: <b>write and run your own program</b></li></ul>\n    <a href="emulator.html" class="emu-launch">Start typing &#8594;</a>\n    <div class="emu-note">An on&#8209;screen keyboard appears, and a lesson can type the commands for you.</div>`}"""
+# The launch screen. A kiosk-only card: the concept page has no emulator.
+# The mock session is the real output format of this OS/32 image (2026-09-16).
+EMU_CARD = r""",
+  {cls:"ccard emu", html:`<div class="ek">Try it yourself</div>
+    <h2>Step up and type</h2>
+    <div class="emu-term"><div class="emu-tag">OS/32 &middot; live emulation</div><pre>*type hello.ftn
+      PROGRAM HELLO
+      TYPE *, 'HELLO FROM THE 3280'
+      END
+*forclg hello
+HELLO        NO  ERROR(S)
+ HELLO FROM THE 3280
+*<span class="cur"></span></pre></div>
+    <ul class="blist">
+      <li>No mouse, no windows: <b>you type, it answers</b></li>
+      <li>Real <b>OS/32</b>, the operating system this machine ran</li>
+      <li>Three short lessons &mdash; one <b>writes and runs your own program</b></li>
+    </ul>
+    <a href="emulator.html" class="emu-launch">Step up and type &#8594;</a>
+    <div class="emu-note">Fortran, Pascal and C compilers from the 1980s, on the 3280&rsquo;s ancestor architecture (SIMH Interdata 32). Nothing you type is permanent.</div>`}"""
+
 CARDS_JS = _deck.CARDS_JS.rstrip()
 assert CARDS_JS.endswith("];"), "deck did not end as expected"
-CARDS_JS = CARDS_JS[:-2] + EMU_CARD + "\n];"
+CARDS_JS = CARDS_JS[:-2].rstrip()
+if CARDS_JS.endswith(","):          # the deck's trailing comma + our leading one = an
+    CARDS_JS = CARDS_JS[:-1]        # array hole = a blank screen before the emulator
+CARDS_JS = CARDS_JS + EMU_CARD + "\n];"
+assert not re.search(r"\},\s*,", CARDS_JS), "array hole in CARDS - a blank screen"
 
 HTML = r"""<title>Concurrent 3280</title>
 <meta charset="utf-8">
@@ -125,9 +149,16 @@ body{display:flex;flex-direction:column;font-family:"Newsreader",Georgia,serif}
 /*__DECK_CSS__*/
 
 /* ---- the deck fills everything above the bar ---- */
-/* emulator launch button (kiosk-only screen) */
-.card .emu-launch{display:flex;align-items:center;justify-content:center;gap:3cqw;margin-top:auto;background:var(--screen-accent);color:#f4eede;text-decoration:none;padding:5.5cqw;border-radius:2.5cqw;font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(15px,7cqw,26px);letter-spacing:.01em}
-.card .emu-note{font-size:clamp(8px,3.6cqw,12px);color:var(--screen-mut);font-style:italic;margin-top:3.5cqw}
+/* emulator launch screen (kiosk-only). This block is NOT rescaled by S: the
+   cqw values here are already at panel scale. */
+.card .emu-term{position:relative;background:#000;color:#ffb838;border-radius:1.6cqw;padding:3.2cqw 3.4cqw 3cqw;margin:0 0 3.6cqw;
+  box-shadow:0 1px 4px rgba(0,0,0,.25);border:1px solid #2a2417}
+.card .emu-term pre{margin:0;font-family:"Space Mono",ui-monospace,monospace;font-size:2.75cqw;line-height:1.38;white-space:pre;overflow:hidden}
+.card .emu-term .cur{display:inline-block;width:1.5cqw;height:2.8cqw;background:#ffb838;vertical-align:-0.4cqw;animation:blink 1.1s steps(2,jump-none) infinite}
+.card .emu-tag{position:absolute;top:2.2cqw;right:3cqw;font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:1.7cqw;color:#8c805f}
+.card.emu .blist li{font-size:4.2cqw;line-height:1.2}
+.card .emu-launch{display:flex;align-items:center;justify-content:center;gap:3cqw;margin-top:auto;background:var(--screen-accent);color:#f4eede;text-decoration:none;padding:4.4cqw;border-radius:2cqw;font-family:"Archivo",sans-serif;font-weight:700;font-size:5cqw;letter-spacing:.01em}
+.card .emu-note{font-size:2.5cqw;line-height:1.35;color:var(--screen-mut);font-style:italic;margin-top:2.6cqw}
 .display{flex:1 1 auto;width:100%;min-height:0;background:var(--screen);
   color:var(--screen-ink);font-family:"Newsreader",Georgia,serif;line-height:1.55}
 

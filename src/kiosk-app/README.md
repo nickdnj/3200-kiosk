@@ -42,7 +42,7 @@ reviewed words, so they cannot drift apart. Never hand-edit a generated
 | 18 | A quiet first | The line that set Unix free |
 | 19 | Just down the room | Cross-link to the SGI Onyx |
 | 20–22 | Open it up | Full-bleed photographs of the card cage, processor, memory and control |
-| 23 | Try it yourself | The OS/32 terminal |
+| 23 | Try it yourself | Step up and type: a mock OS/32 session, what the emulator is, the launch button (kiosk build only) |
 
 The architecture screens are drawn from Concurrent's own manuals on bitsavers:
 *System Bus Theory* 63-002 R00 (1987), whose Fig. 1-1 names the four processor
@@ -80,9 +80,9 @@ The build's arithmetic sizes the type to fit. Arithmetic cannot predict
 **reflow** — a headline that wraps to three lines instead of two blows the
 budget, and you only find out on the exhibit floor. So `check-fit.py` renders
 the real build in headless Chrome at a true 1080×1920 and measures every
-screen's content against its box. Today the tightest content screen (weather)
-has 6.9% slack; the emulator screen reports 0% because it fills its box by
-design.
+screen's content against its box. Today the tightest screen (weather) has
+6.9% slack. The launch button's margin-top:auto gap is counted as slack, like
+the other auto-margin elements.
 
 Run it after any copy change. It is 25 seconds.
 

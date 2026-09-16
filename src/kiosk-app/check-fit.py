@@ -36,7 +36,7 @@ window.addEventListener('load',()=>setTimeout(()=>{
     for(const c of el.children){
       if(c.classList.contains('hl'))continue;
       const m=getComputedStyle(c);
-      const auto_=c.matches('.prompt,.morep');   // margin-top:auto - that gap IS the slack
+      const auto_=c.matches('.prompt,.morep,.emu-launch');   // margin-top:auto - that gap IS the slack
       need+=c.getBoundingClientRect().height+parseFloat(m.marginBottom)
            +(auto_?0:parseFloat(m.marginTop));
     }
