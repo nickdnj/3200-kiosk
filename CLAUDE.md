@@ -1,6 +1,18 @@
-# CLAUDE.md — 3280 Kiosk
+# CLAUDE.md — 3200 Kiosk
 
-Interactive exhibit kiosk built into the VCF museum's **Concurrent 3280**. Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. **Rev 3 (2026-09-03):** a portrait touchscreen on a conduit spine in front of the open card cage, both factory doors removed and stored, driven by **three on-screen commands only (BACK / HOME / NEXT) — targets, never swipe**. Rev 1–2 had three physical buttons and no touchscreen; the app still answers arrow keys and `Home` so switches can return without a content change. The software runs on a bench today (donated OptiPlex + Acer touchscreen); nothing is installed. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
+> **Re-scoped 2026-09-24: this was the 3280 Kiosk.** The single-machine 3280
+> kiosk is cancelled. This repo now tells the story of the **Concurrent
+> (Perkin-Elmer) Series 3200** as a whole. The museum's "3280" turns out to be a
+> 1993 single-board Am29C300 machine that a former tech calls "Cruncher 5," and
+> there is also a **3210** in storage that could come to the floor. Which
+> machine or machines the kiosk stands beside is an open decision. The
+> software, emulator and Rev 3 hardware carry over unchanged. The deck's
+> 3280-only screens become one chapter of the series story. Repo renamed
+> `nickdnj/3280-kiosk` → `nickdnj/3200-kiosk`; GitHub redirects the old URL.
+> The bench PC's on-device paths (`/opt/3280-kiosk`, `/var/lib/3280-kiosk`)
+> are unchanged until the next redeploy.
+
+Interactive exhibit kiosk for the VCF museum's **Concurrent Series 3200** machines (the museum's "3280" and a 3210 in storage). Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. **Rev 3 (2026-09-03):** a portrait touchscreen on a conduit spine in front of the open card cage, both factory doors removed and stored, driven by **three on-screen commands only (BACK / HOME / NEXT) — targets, never swipe**. Rev 1–2 had three physical buttons and no touchscreen; the app still answers arrow keys and `Home` so switches can return without a content change. The software runs on a bench today (donated OptiPlex + Acer touchscreen); nothing is installed. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
 
 Start here: `docs/05-status-report.md` — where things stand, kept current. Then `docs/00-project-brief.md` — origin, content spec (from docent review), and the cross-exhibit link to the SGI Onyx.
 
@@ -38,7 +50,7 @@ its README says which is which.
 - **Docs first for new products:** PRD → architecture → UX → dev plan → GitHub issues, then build.
 - **Transfer ownership:** every project must hand operational ownership to its actual user before it ships — Nick-in-the-loop forever means the project failed.
 - **No demo fallback:** show error states, not demo data, when services are unavailable.
-- **The 3280 is a museum artifact:** all mounting must be reversible and non-destructive. Verify real cabinet dimensions before committing bracket geometry.
+- **The machines are museum artifacts:** all mounting must be reversible and non-destructive. Verify real cabinet dimensions before committing bracket geometry.
 - **Content bar (docent-set):** ~30% of web copy, 3–5 bullets/screen, big sans-serif, readable at 3–6 ft, verified facts only. See the brief.
 - **Wiki first:** authoritative knowledge base is `~/Workspaces/wiki/` (esp. `projects/concurrent-3280-museum/`).
 

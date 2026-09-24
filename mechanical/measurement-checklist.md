@@ -2,7 +2,7 @@
 
 > **Print this, or open it on your phone.** Fill the blanks in place, commit the
 > filled copy, and [`dimensions-assumed.md`](dimensions-assumed.md) gets rewritten
-> against it. Tracks [issue #26](https://github.com/nickdnj/3280-kiosk/issues/26).
+> against it. Tracks [issue #26](https://github.com/nickdnj/3200-kiosk/issues/26).
 
 **Date:** ______________  **Measured by:** ______________  **Present:** ______________
 

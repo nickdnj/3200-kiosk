@@ -188,5 +188,5 @@ panel** — so rack stock is directly useful, not just fasteners.
 2. Update [`bom.md`](bom.md): move salvaged items to **Have**, leave the rest as **Buy**.
 3. If a panel came home: measure its real outline and thickness, and update
    [`dimensions-assumed.md`](../mechanical/dimensions-assumed.md) §D3.
-4. Comment on [EL-1](https://github.com/nickdnj/3280-kiosk/issues/20) and
-   [EL-5](https://github.com/nickdnj/3280-kiosk/issues/24) with what turned up.
+4. Comment on [EL-1](https://github.com/nickdnj/3200-kiosk/issues/20) and
+   [EL-5](https://github.com/nickdnj/3200-kiosk/issues/24) with what turned up.

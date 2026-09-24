@@ -250,5 +250,5 @@ proportion mistake that would otherwise arrive as finished, painted metal.
 **Fabrication package:** [`fab/`](fab/) — order sheet, DXFs, previews and the
 parametric generator. Built against assumed numbers; see its §6 release gate.
 
-*Tracks [ME-4](https://github.com/nickdnj/3280-kiosk/issues/29). Revised when
+*Tracks [ME-4](https://github.com/nickdnj/3200-kiosk/issues/29). Revised when
 ME-1 and EL-5 data land.*

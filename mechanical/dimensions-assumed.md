@@ -208,6 +208,6 @@ nylon or felt at every contact point, and every original fastener removed gets
 
 ---
 
-*Superseded by measured data after ME-1 ([issue #26](https://github.com/nickdnj/3280-kiosk/issues/26)).
+*Superseded by measured data after ME-1 ([issue #26](https://github.com/nickdnj/3200-kiosk/issues/26)).
 When that lands, this file gets a "MEASURED" column beside "ASSUMED" and the
 deltas get called out.*

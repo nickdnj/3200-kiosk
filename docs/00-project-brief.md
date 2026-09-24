@@ -1,4 +1,16 @@
-# 3280 Kiosk — Project Brief
+# 3200 Kiosk — Project Brief
+
+> **Re-scoped 2026-09-24: this was the 3280 Kiosk.** The single-machine 3280
+> kiosk is cancelled. This repo now tells the story of the **Concurrent
+> (Perkin-Elmer) Series 3200** as a whole. The museum's "3280" turns out to be a
+> 1993 single-board Am29C300 machine that a former tech calls "Cruncher 5," and
+> there is also a **3210** in storage that could come to the floor. Which
+> machine or machines the kiosk stands beside is an open decision. The
+> software, emulator and Rev 3 hardware carry over unchanged. The deck's
+> 3280-only screens become one chapter of the series story. Repo renamed
+> `nickdnj/3280-kiosk` → `nickdnj/3200-kiosk`; GitHub redirects the old URL.
+> The bench PC's on-device paths (`/opt/3280-kiosk`, `/var/lib/3280-kiosk`)
+> are unchanged until the next redeploy.
 
 > **Status: CONCEPT.** This brief, the seeded app, and the renders describe the
 > exhibit we're driving toward — the guiding light, not a finished piece.

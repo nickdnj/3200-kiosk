@@ -143,7 +143,7 @@ day 0 ─┬─ M1 Content lock (SW) ──────────────�
 - **Board (optional):** columns Backlog → Ready → In progress → Done.
 
 **Created 2026-08-22** — all 39 story issues, 5 milestones and the track labels are
-live at [nickdnj/3280-kiosk/issues](https://github.com/nickdnj/3280-kiosk/issues).
+live at [nickdnj/3280-kiosk/issues](https://github.com/nickdnj/3200-kiosk/issues).
 
 ---
 

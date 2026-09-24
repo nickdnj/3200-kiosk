@@ -1,7 +1,20 @@
-# 3280 Kiosk
+# 3200 Kiosk
+
+> **Re-scoped 2026-09-24: this was the 3280 Kiosk.** The single-machine 3280
+> kiosk is cancelled. This repo now tells the story of the **Concurrent
+> (Perkin-Elmer) Series 3200** as a whole. The museum's "3280" turns out to be a
+> 1993 single-board Am29C300 machine that a former tech calls "Cruncher 5," and
+> there is also a **3210** in storage that could come to the floor. Which
+> machine or machines the kiosk stands beside is an open decision. The
+> software, emulator and Rev 3 hardware carry over unchanged. The deck's
+> 3280-only screens become one chapter of the series story. Repo renamed
+> `nickdnj/3280-kiosk` → `nickdnj/3200-kiosk`; GitHub redirects the old URL.
+> The bench PC's on-device paths (`/opt/3280-kiosk`, `/var/lib/3280-kiosk`)
+> are unchanged until the next redeploy.
 
 An interactive exhibit kiosk for the Vintage Computer Federation museum's
-**Concurrent 3280**. A portrait touchscreen floats in front of the machine's
+**Concurrent Series 3200** machines. (The Rev 3 hardware below was designed
+around the "3280" cabinet.) A portrait touchscreen floats in front of the machine's
 open card cage on a conduit spine. Three on-screen commands — **BACK / HOME /
 NEXT** — step through the machine's story, and a final screen lets a visitor
 type at a live OS/32 system.
@@ -53,7 +66,7 @@ Team: **Software Project Team**, provisioned by AgentArchitect (2026-08-22).
 `03-ux.md` → `04-dev-plan.md` → `05-status-report.md`. The PRD, UX and dev
 plan were written for Rev 1; the architecture doc's §15 records the Rev 3
 change. Work is tracked as
-[GitHub issues](https://github.com/nickdnj/3280-kiosk/issues), reconciled
+[GitHub issues](https://github.com/nickdnj/3200-kiosk/issues), reconciled
 with Rev 3 on 2026-09-15.
 
 ## Start

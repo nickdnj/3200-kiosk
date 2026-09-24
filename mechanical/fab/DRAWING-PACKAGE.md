@@ -28,7 +28,7 @@ the door open and the real boards are behind it. The door has to look like it
 belongs on a 1980s minicomputer, survive unattended public use, and mount to the
 cabinet **reversibly — no drilling into the artifact.**
 
-Full project: [github.com/nickdnj/3280-kiosk](https://github.com/nickdnj/3280-kiosk)
+Full project: [github.com/nickdnj/3200-kiosk](https://github.com/nickdnj/3200-kiosk)
 
 ---
 
@@ -169,8 +169,8 @@ an edit and a re-run.
 
 ## 9. Contact
 
-Nick DeMarco · [github.com/nickdnj/3280-kiosk](https://github.com/nickdnj/3280-kiosk)
-· issue [ME-4](https://github.com/nickdnj/3280-kiosk/issues/29) tracks this work
+Nick DeMarco · [github.com/nickdnj/3200-kiosk](https://github.com/nickdnj/3200-kiosk)
+· issue [ME-4](https://github.com/nickdnj/3200-kiosk/issues/29) tracks this work
 
 *This is a concept build — the guiding light we're driving toward, not a shipped
 exhibit. Cabinet imagery elsewhere in the repo is AI concept art and is flagged
