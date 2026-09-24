@@ -8,8 +8,8 @@ designed in 1993 and shipped in 1995. Its marketing name is unknown.
 
 | File | What it shows |
 |---|---|
-| `…IMG_1187.jpg` | component side, full board |
-| `…IMG_1188.jpg` | component side, second view |
+| `…IMG_1187.jpg` | solder side, full board, green rework wire near the centre |
+| `…IMG_1188.jpg` | solder side, backplane-edge close-up: 25-AAM R02 etch and the 35-AAM assembly tag |
 | `…IMG_1189.jpg` | solder side, with the etch **"COPYRIGHT 1993 CONCURRENT COMPUTER CORPORATION"** along the backplane edge |
 | `…IMG_1190.jpg` | bus-interface strip: two SBI gate arrays, AMP connectors |
 | `…IMG_1191.jpg` | front edge, silkscreen **PROCESSOR** |
