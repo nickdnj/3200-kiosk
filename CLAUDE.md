@@ -2,9 +2,13 @@
 
 > **Re-scoped 2026-09-24: this was the 3280 Kiosk.** The single-machine 3280
 > kiosk is cancelled. This repo now tells the story of the **Concurrent
-> (Perkin-Elmer) Series 3200** as a whole. The museum's "3280" turns out to be a
-> 1993 single-board Am29C300 machine that a former tech calls "Cruncher 5," and
-> there is also a **3210** in storage that could come to the floor. Which
+> (Perkin-Elmer) Series 3200** as a whole. The museum's machine that was
+> catalogued as a "3280" is **not a 1986 3280**. It was designed in 1993 and
+> shipped in 1995, and it runs on one Am29C300 processor board. Its marketing
+> name is unknown. The only name on the hardware is the board's own etch,
+> "COPYRIGHT 1993 CONCURRENT COMPUTER CORPORATION". Tim Coulson, a former tech
+> on it, calls it "Cruncher 5". Don't call it a 3280 anywhere. There is also a
+> **3210** in storage that could come to the floor. Which
 > machine or machines the kiosk stands beside is an open decision. The
 > software, emulator and Rev 3 hardware carry over unchanged. The deck's
 > 3280-only screens become one chapter of the series story. Repo renamed
@@ -12,7 +16,7 @@
 > The bench PC's on-device paths (`/opt/3280-kiosk`, `/var/lib/3280-kiosk`)
 > are unchanged until the next redeploy.
 
-Interactive exhibit kiosk for the VCF museum's **Concurrent Series 3200** machines (the museum's "3280" and a 3210 in storage). Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. **Rev 3 (2026-09-03):** a portrait touchscreen on a conduit spine in front of the open card cage, both factory doors removed and stored, driven by **three on-screen commands only (BACK / HOME / NEXT) — targets, never swipe**. Rev 1–2 had three physical buttons and no touchscreen; the app still answers arrow keys and `Home` so switches can return without a content change. The software runs on a bench today (donated OptiPlex + Acer touchscreen); nothing is installed. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
+Interactive exhibit kiosk for the VCF museum's **Concurrent Series 3200** machines (the museum's 1993-design machine, formerly catalogued as a "3280", and a 3210 in storage). Spans three disciplines — software, electronics, and mechanical — so the deliverable is a working installation, not just an app. **Rev 3 (2026-09-03):** a portrait touchscreen on a conduit spine in front of the open card cage, both factory doors removed and stored, driven by **three on-screen commands only (BACK / HOME / NEXT) — targets, never swipe**. Rev 1–2 had three physical buttons and no touchscreen; the app still answers arrow keys and `Home` so switches can return without a content change. The software runs on a bench today (donated OptiPlex + Acer touchscreen); nothing is installed. Developed with the **Software Project Team** (software-project). Provisioned by AgentArchitect; agent/team definitions live in the factory at `/Users/nickd/Workspaces/AgentArchitect`.
 
 Start here: `docs/05-status-report.md` — where things stand, kept current. Then `docs/00-project-brief.md` — origin, content spec (from docent review), and the cross-exhibit link to the SGI Onyx.
 
