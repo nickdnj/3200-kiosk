@@ -3,8 +3,9 @@
 > **Re-scoped 2026-09-24: this was the 3280 Kiosk.** The single-machine 3280
 > kiosk is cancelled. This repo now tells the story of the **Concurrent
 > (Perkin-Elmer) Series 3200** as a whole. The museum's machine that was
-> catalogued as a "3280" is **not a 1986 3280**. It was designed in 1993 and
-> shipped in 1995, and it runs on one Am29C300 processor board. Its marketing
+> catalogued as a "3280" is **not a 1986 3280**. It was designed in 1993 (its
+> chips date from 1993 to 1995; its programmed parts carry 1996 labels, so the
+> board was built in 1996 or later), and it runs on one Am29C300 processor board. Its marketing
 > name is unknown. The only name on the hardware is the board's own etch,
 > "COPYRIGHT 1993 CONCURRENT COMPUTER CORPORATION". Tim Coulson, a former tech
 > on it, calls it "Cruncher 5". Don't call it a 3280 anywhere. There is also a
